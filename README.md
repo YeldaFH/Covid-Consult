@@ -1,5 +1,3 @@
-# covid_consult
-
 # CovidConsult
 
 ## Daftar Isi
