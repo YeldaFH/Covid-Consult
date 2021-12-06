@@ -5,7 +5,7 @@
 - [CovidConsult](#covidconsult)
   - [Daftar Isi](#daftar-isi)
   - [Kelompok C01](#kelompok-c01)
-  - [Link Herokuapp](#link-herokuapp)
+  - [Link download APK](#download-apk)
   - [Latar Belakang CovidConsult](#latar-belakang-covidconsult)
   - [Nama modul dan pembagiannya](#nama-modul-dan-pembagiannya)
   - [Persona](#persona)
@@ -22,8 +22,8 @@
 6. Muhammad Iqbal Asrif (2006473945)
 7. Muhammad Asyraf (2006463244)
 
-## APK
-
+## Download APK
+Untuk mendownload APK dapat melalui link [ini](https://github.com/YeldaFH/Covid-Consult/releases/)
 
 ## Latar Belakang CovidConsult
 
