@@ -2,9 +2,9 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   article:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: article
+      path: "../article"
       relative: true
     source: path
     version: "0.0.1"
@@ -50,8 +50,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
+  covid_consult:
     dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  cupertino_icons:
+    dependency: transitive
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
@@ -82,9 +89,9 @@ packages:
     source: sdk
     version: "0.0.0"
   forum:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: forum
+      path: "../forum"
       relative: true
     source: path
     version: "0.0.1"
@@ -110,9 +117,9 @@ packages:
     source: hosted
     version: "1.7.0"
   obatpedia:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: obatpedia
+      path: "../obatpedia"
       relative: true
     source: path
     version: "0.0.1"
@@ -123,13 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  profil:
-    dependency: "direct main"
-    description:
-      path: profil
-      relative: true
-    source: path
-    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
