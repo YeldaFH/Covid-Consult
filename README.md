@@ -11,16 +11,14 @@
   - [Persona](#persona)
 
 ## Kelompok C01
-
 **Nama Anggota:**
-
-1. Pramudiptha (2006482426)
-2. Pradipta Davi Valendra (2006462664)
-3. Patrick Alexander (1906398710)
-4. Yelda Faizah Havara (2006464386)
+1. Yelda Faizah Havara (2006464386)
+2. Muhammad Asyraf (2006463244)
+3. Muhammad Iqbal Asrif (2006473945)
+4. Pradipta Davi Valendra (2006462664)
 5. Tara Mazaya Lababan (2006473535)
-6. Muhammad Iqbal Asrif (2006473945)
-7. Muhammad Asyraf (2006463244)
+6. Pramudiptha (2006482426)
+7. P4tr1ck Al3x4nd3r (1906398710)
 
 ## Download APK
 Untuk mendownload APK dapat melalui link [ini](https://github.com/YeldaFH/Covid-Consult/releases/)
@@ -53,7 +51,6 @@ Pandemi Covid-19 telah membawa banyak perubahan dalam kehidupan manusia. Hampir 
    1. Searchable artikel-artikel
 
 ## Persona
-
 1. Guest User
    1. Bisa liat homepage, CovidInfo,info obat, Forum, Konsultasi (**view-only**)
 2. Login User
