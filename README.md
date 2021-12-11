@@ -46,7 +46,6 @@ Pandemi Covid-19 telah membawa banyak perubahan dalam kehidupan manusia. Hampir 
    1. Searchable database user-user (Admin view - ajax)
 6. Profile (Pram)
    1. Password + Username (Changeable) 
-   2. booking konsul (sortable)
 7. Artikel (Asyraf)
    1. Searchable artikel-artikel
 
