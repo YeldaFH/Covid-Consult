@@ -1,25 +1,27 @@
 // import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:covid_consult/cookie/CookieRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
-import 'package:forum/models/model.dart';
+import 'package:forum/forum.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
+// import 'package:forum/models/model.dart';
 // import 'package:intl/intl.dart';
 
 // ignore: camel_case_types
-class Add_Forum extends StatefulWidget {
-  const Add_Forum({Key? key}) : super(key: key);
-  static const routeName = '/add-forum';
-
+class AddForum extends StatefulWidget {
   @override
-  State<Add_Forum> createState() => _ForumPageState();
+  Add_Forum createState() => Add_Forum();
 }
 
-class _ForumPageState extends State<Add_Forum> {
+class Add_Forum extends State<AddForum> {
   final _formKey = GlobalKey<FormState>();
   final _categories = ['General Discussion', 'Covid Info', 'Drug Info'];
   PostForum postForum = PostForum();
   // Saved variables to be submitted
   String _title = "";
   String _content = "";
+  String _category = "";
   String? _value;
   DropdownMenuItem<String> buildMenuItem(String value) =>
       DropdownMenuItem<String>(
@@ -32,6 +34,7 @@ class _ForumPageState extends State<Add_Forum> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
       appBar: AppBar(
@@ -98,6 +101,15 @@ class _ForumPageState extends State<Add_Forum> {
                     return buildMenuItem(value);
                   }).toList(),
                   onChanged: (String? value) => setState(() {
+                        if(value != null) {
+                          if(value == "General Discussion") {
+                            _category = 'general';
+                          } else if(value == "Covid Info") {
+                            _category = 'covid';
+                          } else if(value == "Drug Info") {
+                            _category = 'drug';
+                          }
+                        }
                     value = value as String;
                   }),
                   onSaved: (String? value) {
@@ -144,44 +156,24 @@ class _ForumPageState extends State<Add_Forum> {
                     // ignore: deprecated_member_use
                     RaisedButton(
                       child: const Text("Post to Forum"),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // var now = DateTime.now();
-                          // String date = now as String;
-                          // print(date);
-                          String str = _title + " " + ' tara ' + _content;
-                          Post post = Post(
-                            id: 0,
-                            judul: _title,
-                            kategori: 'general',
-                            isi: _content,
-                            dateTime: 'ahfs',
-                            warna: '#bcbcbc',
-                            namaPenulis: 'user1',
-                            penulis: 24,
-                            strings: str,
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? true) {
+                          final response = await request.postJson(
+                            'http://10.0.2.2:8000/forum/postNewForum/',
+                            convert.jsonEncode(<String, String>{
+                              'judul': _title,
+                              'isi': _content,
+                              'kategori': _category,
+                            }),
                           );
-                          postForum.addNewForum(post).then((value) {
-ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    value,
-                                  ),
-                                ),
-                              );
-                          });
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (_) => const AlertDialog(
-                          //     title: Text("Your article has been publish"),
-                          //   ),
-                          // );
-                          // ignore: avoid_print
-                          print("success");
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => const MainPage(title: "main")),
-                          // );
+                          if (response['status'] == 'success') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => MainForum(
+                                        title: 'Forum',
+                                        currentCategory: 'All Category')));
+                          }
                         }
                       },
                       color: const Color(0xff6B46C1),

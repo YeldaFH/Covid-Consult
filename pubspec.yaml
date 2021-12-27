@@ -45,6 +45,7 @@ dependencies:
     path: obatpedia
   profil:
     path: profil
+  shared_preferences: ^2.0.11
 
 dev_dependencies:
   flutter_test:

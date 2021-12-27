@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'package:forum/models/model.dart';
 import 'package:http/http.dart' as http;
+import 'package:covid_consult/cookie/CookieRequest.dart';
+import 'package:provider/provider.dart';
+
 
 class PostForum {
-  Future<List<Post>> getForumCategory(String category) async {
+  Future<List<Post>> getForumCategory(CookieRequest request,String category) async {
     // print(category);
     if (category == 'All Category') {
       category = 'all';
@@ -14,8 +17,20 @@ class PostForum {
     } else if (category == 'Drug Info'){
       category = 'drug';
     } else{
-      category = 'user';
+      // category = 'user';
+      
+      String url = "http://10.0.2.2:8000/forum/api/user/";
+      final response = await request.get(url);
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
+      List<Post> post = [];
+      for (var d in data) {
+        if (d != null) {
+          post.add(Post.fromJson(d));
+        }
+      }
+      return post;
     }
+    
     String url = "http://10.0.2.2:8000/forum/api/$category/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));

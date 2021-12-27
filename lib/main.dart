@@ -1,10 +1,9 @@
 // import 'package:forum/api/api.dart';
 // import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import './screens/addTodo.dart';
-
+ import 'package:provider/provider.dart';
+import 'package:covid_consult/cookie/CookieRequest.dart';
 import 'package:flutter/material.dart';
-import 'package:covid_consult/widgets/main_drawer.dart';
+import '../widgets/main_drawer.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -13,14 +12,21 @@ class MyApp extends StatelessWidget {
   static const String title = 'HomePage';
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) {
+    return Provider(
+        create: (_) {
+          CookieRequest request = CookieRequest();
+
+          return request;
+        },child: MaterialApp(
         debugShowCheckedModeBanner: false,
         darkTheme: ThemeData(
             brightness: Brightness.dark, primarySwatch: Colors.purple),
         themeMode: ThemeMode.dark,
         title: title,
         home: const MainPage(title: title),
-      );
+    ));
+  }
 }
 
 class MainPage extends StatefulWidget {
@@ -73,4 +79,3 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 }
-

@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:forum/models/model.dart';
 import 'package:forum/screens/add_forum.dart';
 import 'package:forum/screens/detail_forum.dart';
 import 'package:forum/screens/detail_forum_search.dart';
+import 'package:provider/provider.dart';
+import 'package:covid_consult/cookie/CookieRequest.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
       );
 }
 
-class MainForum extends StatefulWidget {  
+class MainForum extends StatefulWidget {
   final String title;
   final String currentCategory;
   // ignore: use_key_in_widget_constructors
@@ -93,129 +96,125 @@ class _MainForumState extends State<MainForum> {
   );
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        drawer: const MainDrawer(),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff131313),
-          title: Text(
-            widget.title,
-            textScaleFactor: 1.3,
+  Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    return Scaffold(
+      drawer: const MainDrawer(),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff131313),
+        title: Text(
+          widget.title,
+          textScaleFactor: 1.3,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => SearchPage())),
+              icon: const Icon(Icons.search))
+        ],
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: <Widget>[
+          topCategoyIcons,
+          categoryMetric,
+          Container(
+            child: Text(
+              currentCategory,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+            ),
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
           ),
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => SearchPage())),
-                icon: const Icon(Icons.search))
-          ],
-        ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: <Widget>[
-            topCategoyIcons,
-            categoryMetric,
-            Container(
-              child: Text(
-                currentCategory,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-              ),
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            ),
-            FutureBuilder<List>(
-              future: PostService.getForumCategory(currentCategory),
-              builder: (context, snapshot) {
-                // print(snapshot);
+          FutureBuilder<List>(
+            future: PostService.getForumCategory(request, currentCategory),
+            builder: (context, snapshot) {
+              // print(snapshot);
 
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var kategori = snapshot.data![index].kategori;
-                      var category;
-                      switch (kategori) {
-                        case "general":
-                          {
-                            category = "General";
-                          }
-                          break;
-                        case "covid":
-                          {
-                            category = "Covid Info";
-                          }
-                          break;
-                        case "drug":
-                          {
-                            category = "Drug Info";
-                          }
-                          break;
-                      }
-                      var dataForum = snapshot.data![index];
-                      var day = dataForum.dateTime.substring(8, 10);
-                      var month = dataForum.dateTime.substring(5, 7);
-                      var year = dataForum.dateTime.substring(0, 4);
-                      var time = dataForum.dateTime.substring(11, 16);
-                      var dateTime =
-                          day + '-' + month + '-' + year + ' ' + time + ' WIB';
-                      var temp = dataForum.isi;
-                      if (dataForum.isi.length > 20) {
-                        temp = dataForum.isi.substring(0, 20) + "...";
-                      }
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: HexColor(dataForum.warna),
-                            foregroundColor: Colors.black,
-                            radius: 25,
-                            child: Text(
-                              dataForum.namaPenulis[0].toUpperCase(),
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var kategori = snapshot.data![index].kategori;
+                    var category;
+                    switch (kategori) {
+                      case "general":
+                        {
+                          category = "General";
+                        }
+                        break;
+                      case "covid":
+                        {
+                          category = "Covid Info";
+                        }
+                        break;
+                      case "drug":
+                        {
+                          category = "Drug Info";
+                        }
+                        break;
+                    }
+                    var dataForum = snapshot.data![index];
+                    var day = dataForum.dateTime.substring(8, 10);
+                    var month = dataForum.dateTime.substring(5, 7);
+                    var year = dataForum.dateTime.substring(0, 4);
+                    var time = dataForum.dateTime.substring(11, 16);
+                    var dateTime =
+                        day + '-' + month + '-' + year + ' ' + time + ' WIB';
+                    var temp = dataForum.isi;
+                    if (dataForum.isi.length > 20) {
+                      temp = dataForum.isi.substring(0, 20) + "...";
+                    }
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: HexColor(dataForum.warna),
+                          foregroundColor: Colors.black,
+                          radius: 25,
+                          child: Text(
+                            dataForum.namaPenulis[0].toUpperCase(),
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          title:
-                              Text(dataForum.judul + " [" + category + "]"),
-                          isThreeLine: true,
-                          subtitle: Text(' by ' +
-                              dataForum.namaPenulis +
-                              ' on ' +
-                              dateTime +
-                              '\n' +
-                              temp),
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailForum(dataForum))),
-                          trailing: const Icon(Icons.keyboard_arrow_right),
                         ),
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("-->>${snapshot.error}<<--");
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => const Add_Forum())),
-          backgroundColor: const Color(0xff6B46C1),
-          child: const Icon(Icons.add),
-        ),
-      );
-
-  Widget buildSearch() {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Material App',
+                        title: Text(dataForum.judul + " [" + category + "]"),
+                        isThreeLine: true,
+                        subtitle: Text(' by ' +
+                            dataForum.namaPenulis +
+                            ' on ' +
+                            dateTime +
+                            '\n' +
+                            temp),
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => DetailForum(dataForum))),
+                        trailing: const Icon(Icons.keyboard_arrow_right),
+                      ),
+                    );
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Text("-->>${snapshot.error}<<--");
+              }
+              return CircularProgressIndicator();
+            },
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddForum()));
+        },
+        backgroundColor: const Color(0xff6B46C1),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -257,7 +256,7 @@ class CategoryIcon extends StatelessWidget {
                         title: 'Forum',
                         currentCategory: 'Covid Info',
                       )));
-            } else if(iconText == 'My Discussion'){
+            } else if (iconText == 'My Discussion') {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => MainForum(
                         title: 'Forum',
@@ -334,7 +333,7 @@ class _SearchPageState extends State<SearchPage> {
       )),
       body: ListView(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           ListView.builder(
@@ -397,16 +396,6 @@ class _SearchPageState extends State<SearchPage> {
         ],
       ),
     );
-    // child: Column(
-    //   children: <Widget>[
-    //     ListTile(
-    //       title: Text(searchResult['judul']),
-    //       subtitle: Text(searchResult['isi'].substring(0, 3) + '...'),
-    //     ),
-    //     Divider(color: Colors.black)
-    //   ],
-    // ),
-    // );
   }
 }
 
