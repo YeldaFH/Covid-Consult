@@ -43,6 +43,9 @@ dependencies:
     path: obatpedia
   profil:
     path: profil
+  shared_preferences: ^2.0.11
+  search_page: ^2.0.0+1
+  bouncing_widget: ^2.0.0
 
 dev_dependencies:
   flutter_test:
