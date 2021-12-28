@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Flexible(
                     child: Center(
                       child: Text(
-                        'Reflekt.io',
+                        'Covid Consult',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 60,
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyHomePage())),
+                            builder: (context) => const SignUpScreen())),
                     child: Container(
                       child: const Text(
                         'Create New Account',

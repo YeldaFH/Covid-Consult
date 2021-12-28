@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:covid_consult/screens/login_page.dart';
-import 'package:covid_consult/screens/sign_up.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
 
