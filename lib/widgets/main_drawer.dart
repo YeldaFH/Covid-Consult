@@ -3,6 +3,7 @@ import 'package:forum/forum.dart';
 import 'package:obatpedia/obatpedia.dart';
 import 'package:profil/profil.dart';
 import 'package:article/article.dart';
+import 'package:covid_consult/main.dart';
 // import 'package:consultation/consultation.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -51,7 +52,7 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.pop(context);
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainPage(title: 'Homepage')));
           }),          
           buildListTile('Consultation', Icons.receipt_rounded, () {
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainConsultation(title: 'Consultation')));

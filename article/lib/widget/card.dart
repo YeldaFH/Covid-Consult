@@ -1,3 +1,4 @@
+import 'package:article/detailArticle.dart';
 import 'package:flutter/material.dart';
 import 'package:article/models/model.dart';
 
@@ -16,9 +17,7 @@ class ArtikelCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: ExpansionTile(
-          textColor: const Color.fromARGB(255, 208,170,243),
-          iconColor:const Color.fromARGB(255, 208,170,243),
+        child: ListTile(
           title: Text(
                 model.judul,
                 style: const TextStyle(fontWeight: FontWeight.bold),
@@ -26,46 +25,14 @@ class ArtikelCard extends StatelessWidget {
           subtitle: Text(
                 'Create by ' + model.penulis + ' on '+ date+'-'+month+'-'+year
               ),
-         
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(model.isi),
-            ),]
-          // clipBehavior: Clip.antiAlias,
-          // child: Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: ExpansionTile(
-          //     backgroundColor: Colors.white12,
-          //     // Judul
-              // title: Text(
-              //   model.judul,
-              //   style: const TextStyle(fontWeight: FontWeight.bold),
-              // ),
-              // subtitle: Text(
-              //   'Create by ' + model.penulis + ' on '+ date+'-'+month+'-'+year
-              // ),
-          //     trailing: const SizedBox(),
-          //     children: [
-          //       Padding(
-          //         padding: const EdgeInsets.only(
-          //             top: 16.0, left: 16.0, right: 16.0, bottom: 8.0),
-          //         child: Row(
-          //           children: [
-          //             Flexible(
-          //               child: Text(
-          //                 'isi: ' + model.isi ,
-          //                 style:
-          //                     TextStyle(color: Colors.black87.withOpacity(0.6)),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Details(model))),
+                          trailing: const Icon(Icons.read_more),
+                        ),
+          
     )
-    ));
+    );
   }
 }

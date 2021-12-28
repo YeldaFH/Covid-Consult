@@ -7,12 +7,14 @@ import 'package:article/widget/card.dart';
 import 'add_article.dart';
 import 'package:covid_consult/cookie/CookieRequest.dart';
 import 'package:search_page/search_page.dart';
+
+import 'detailArticle.dart';
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  static const String title = 'HomeArticle';
+  static const String title = 'Home Article';
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -180,57 +182,23 @@ class _MainArticleState extends State<MainArticle> {
           shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: ExpansionTile(
-          textColor: const Color.fromARGB(255, 208,170,243),
-          iconColor:const Color.fromARGB(255, 208,170,243),
+        child: ListTile(
           title: Text(
                 model.judul,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
           subtitle: Text(
-                'Create by ' + model.penulis + ' on '+ model.datetime.substring(8,10)+'-'+model.datetime.substring(5,7)+'-'+ model.datetime.substring(0,4)
+                'Create by ' + model.penulis + ' on '+ model.datetime.substring(8,10)+'-'+model.datetime.substring(5,7)+'-'+model.datetime.substring(0,4)
               ),
-         
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(model.isi),
-            ),]
-          // clipBehavior: Clip.antiAlias,
-          // child: Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: ExpansionTile(
-          //     backgroundColor: Colors.white12,
-          //     // Judul
-              // title: Text(
-              //   model.judul,
-              //   style: const TextStyle(fontWeight: FontWeight.bold),
-              // ),
-              // subtitle: Text(
-              //   'Create by ' + model.penulis + ' on '+ date+'-'+month+'-'+year
-              // ),
-          //     trailing: const SizedBox(),
-          //     children: [
-          //       Padding(
-          //         padding: const EdgeInsets.only(
-          //             top: 16.0, left: 16.0, right: 16.0, bottom: 8.0),
-          //         child: Row(
-          //           children: [
-          //             Flexible(
-          //               child: Text(
-          //                 'isi: ' + model.isi ,
-          //                 style:
-          //                     TextStyle(color: Colors.black87.withOpacity(0.6)),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Details(model))),
+                          trailing: const Icon(Icons.read_more),
+                        ),
+          
     )
-    )),
+    ),
           ),
         ),
         child: Icon(Icons.search),
