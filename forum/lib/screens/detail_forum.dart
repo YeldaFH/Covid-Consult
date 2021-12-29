@@ -1,8 +1,12 @@
+import 'package:covid_consult/common/network_service.dart';
+import 'package:forum/screens/add_reply.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:forum/models/model.dart';
+import 'dart:convert' as convert;
 import '../forum.dart';
-
+import 'package:bouncing_widget/bouncing_widget.dart';
 // ignore: camel_case_types
 class DetailForum extends StatefulWidget {
   var dataForum;
@@ -15,6 +19,7 @@ class DetailForum extends StatefulWidget {
 
 class DetailForumState extends State<DetailForum> {
   var dataForum;
+  String _comment = "";
   CommentForumService commentService = CommentForumService();
   ReplyCommentForumService replyService = ReplyCommentForumService();
 
@@ -28,25 +33,23 @@ class DetailForumState extends State<DetailForum> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Scaffold(
       backgroundColor: const Color(0xff131313),
       appBar: AppBar(
         title: const Text('Forum'),
         backgroundColor: const Color(0xff131313),
       ),
-      body: 
-      ListView(padding: const EdgeInsets.all(16), 
-      children: <Widget>[
+      body: ListView(padding: const EdgeInsets.all(16), children: <Widget>[
         CircleAvatar(
-                backgroundColor: HexColor(dataForum.warna),
-                foregroundColor: Colors.black,
-                radius: 25,
-                child: Text( 
-                  dataForum.namaPenulis[0].toUpperCase(),
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
+          backgroundColor: HexColor(dataForum.warna),
+          foregroundColor: Colors.black,
+          radius: 25,
+          child: Text(
+            dataForum.namaPenulis[0].toUpperCase(),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
         Container(
           child: Text(
             dataForum.judul,
@@ -95,13 +98,22 @@ class DetailForumState extends State<DetailForum> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please fill out this field.';
-                    }
-                    return null;
+                  onChanged: (String? value) {
+                    setState(() {
+                      _comment = value!;
+                    });
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      _comment = value!;
+                    });
                   },
                   maxLines: 3,
+                  validator: (String? value) {
+                    return (value == null || value.isEmpty)
+                        ? 'Please fill out this field.'
+                        : null;
+                  },
                 ),
                 const SizedBox(height: 20),
                 Padding(
@@ -110,35 +122,67 @@ class DetailForumState extends State<DetailForum> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       // ignore: deprecated_member_use
-                      RaisedButton(
-                        child: const Text("Post to Forum"),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            showDialog(
-                              context: context,
-                              builder: (_) => const AlertDialog(
-                                title: Text("Your comment has been publish"),
-                              ),
+                      BouncingWidget(
+                        scaleFactor: 1.5,
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? true) {
+                            var data = dataForum.id;
+                            // print(data);
+                            String url =
+                                "http://10.0.2.2:8000/forum/commentNewForum/$data/";
+                            // print(url);
+                            final response = await request.postJson(
+                              url,
+                              convert.jsonEncode(<String, String>{
+                                'isi': _comment,
+                              }),
                             );
-                            _processData();
-                            // ignore: avoid_print
-                            print("success");
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => const MainPage(title: "main")),
-                            // );
+                            if (response['status'] == 'success') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("Successfully created comment!"),
+                              ));
+                              setState(() {
+                                _comment = "";
+                              });
+                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => DetailForum(dataForum)));
+                            }
+                            else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content:
+                                    Text("An error occured, please try again."),
+                              ));
+                            }
                           }
                         },
-                        color: const Color(0xff6B46C1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: const BorderSide(
-                              color: Color(0xff6B46C1),
-                            )),
+                        child: Container(
+                          height: 35,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(45.0),
+                            color: const Color(0xff6B46C1),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Post to Comment',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
+
               ],
             ),
           ),
@@ -175,7 +219,7 @@ class DetailForumState extends State<DetailForum> {
     var month = komen.dateTime.substring(5, 7);
     var year = komen.dateTime.substring(0, 4);
     var time = komen.dateTime.substring(11, 16);
-    var dateTime = day + '-' + month + '-' + year + ' ' + time + ' WIB';
+    var dateTime = day + '-' + month + '-' + year + ' || ' + time + ' WIB';
     var temp = komen.isi;
     if (temp.length > 20) {
       temp = komen.isi.substring(0, 20) + "...";
@@ -186,53 +230,64 @@ class DetailForumState extends State<DetailForum> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: ExpansionTile(
-          textColor: const Color.fromARGB(255, 208,170,243),
-          iconColor:const Color.fromARGB(255, 208,170,243),
-          title: Text(
-            komen.namaPenulis,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          leading: CircleAvatar(
-            backgroundColor: HexColor(dataForum.warna),
-            foregroundColor: Colors.black,
-            radius: 25,
-            child: Text(
-              komen.namaPenulis[0].toUpperCase(),
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          subtitle:
-              Text(dateTime + "\n" + temp + '\nReply: ' + komen.jumlahReply),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(komen.isi),
-            ),
-            FutureBuilder<List<Reply>>(
-              future: replyService.getReply(komen.id),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final List<Reply>? reply = snapshot.data;
-                  if (reply?.isNotEmpty ?? false) {
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: reply?.length,
-                        itemBuilder: (context, index) {
-                          return buildReplyItem(reply![index]);
-                        });
-                  } else {
-                    return const Text("0 Reply");
-                  }
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                return CircularProgressIndicator();
-              },
-            ),
+                    ExpansionTile(
+                      textColor: const Color.fromARGB(255, 208, 170, 243),
+                      iconColor: const Color.fromARGB(255, 208, 170, 243),
+                      title: Text(
+                        komen.namaPenulis,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      leading: CircleAvatar(
+                        backgroundColor: HexColor(komen.warna),
+                        foregroundColor: Colors.black,
+                        radius: 25,
+                        child: Text(
+                          komen.namaPenulis[0].toUpperCase(),
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      subtitle:
+                          Text(dateTime + "\n" + temp + '\nReply: ' + komen.jumlahReply),
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(komen.isi),
+                        ),
+                        FutureBuilder<List<Reply>>(
+                          future: replyService.getReply(komen.id),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final List<Reply>? reply = snapshot.data;
+                              if (reply?.isNotEmpty ?? false) {
+                                return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: reply?.length,
+                                    itemBuilder: (context, index) {
+                                      return buildReplyItem(reply![index]);
+                                    });
+                              } else {
+                                return const Text("0 Reply");
+                              }
+                            } else if (snapshot.hasError) {
+                              return Text("${snapshot.error}");
+                            }
+                            return CircularProgressIndicator();
+                          },
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => AddReply(komen,dataForum)));
+                      }, child: const Text('Reply')),
           ],
         ),
+
       ),
     );
   }
@@ -242,7 +297,7 @@ class DetailForumState extends State<DetailForum> {
     var month = reply.dateTime.substring(5, 7);
     var year = reply.dateTime.substring(0, 4);
     var time = reply.dateTime.substring(11, 16);
-    var dateTime = day + '-' + month + '-' + year + ' ' + time + ' WIB';
+    var dateTime = day + '-' + month + '-' + year + ' || ' + time + ' WIB';
     return ListTile(
       isThreeLine: true,
       leading: CircleAvatar(
@@ -251,8 +306,7 @@ class DetailForumState extends State<DetailForum> {
         radius: 25,
         child: Text(
           reply.namaPenulis[0].toUpperCase(),
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       title: Text(reply.namaPenulis + '\n' + dateTime),

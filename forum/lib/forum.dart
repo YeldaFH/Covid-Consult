@@ -1,13 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
-import 'package:forum/models/model.dart';
 import 'package:forum/screens/add_forum.dart';
 import 'package:forum/screens/detail_forum.dart';
 import 'package:forum/screens/detail_forum_search.dart';
 import 'package:provider/provider.dart';
-import 'package:covid_consult/cookie/CookieRequest.dart';
+import 'package:covid_consult/common/network_service.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -97,7 +98,7 @@ class _MainForumState extends State<MainForum> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.watch<NetworkService>();
     return Scaffold(
       drawer: const MainDrawer(),
       appBar: AppBar(
@@ -109,7 +110,7 @@ class _MainForumState extends State<MainForum> {
         actions: [
           IconButton(
               onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SearchPage())),
+                  .push(MaterialPageRoute(builder: (_) => const SearchPage())),
               icon: const Icon(Icons.search))
         ],
       ),
@@ -205,16 +206,38 @@ class _MainForumState extends State<MainForum> {
               return CircularProgressIndicator();
             },
           ),
+
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => AddForum()));
-        },
-        backgroundColor: const Color(0xff6B46C1),
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: BouncingWidget(
+              scaleFactor: 1.5,
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => AddForum()));
+              },
+              child: Container(
+                width: 55,
+                height: 55,
+                decoration: const BoxDecoration(
+                  color: Color(0xff6B46C1), // border color
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
+      //   onPressed: () {
+      //     Navigator.push(
+      //         context, MaterialPageRoute(builder: (_) => AddForum()));
+      //   },
+      //   backgroundColor: const Color(0xff6B46C1),
+      //   child: const Icon(Icons.add, color: Colors.white),
+      // ),
     );
   }
 }
@@ -233,35 +256,25 @@ class CategoryIcon extends StatelessWidget {
           icon: Icon(icon),
           onPressed: () {
             if (iconText == 'All Category') {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MainForum(
-                        title: 'Forum',
-                        currentCategory: 'All Category',
-                      )));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'All Category')),
+                  (Route<dynamic> route) => false);
             } else if (iconText == 'General Discussion') {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MainForum(
-                        title: 'Forum',
-                        currentCategory: 'General Discussion',
-                      )));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'General Discussion')),
+                  (Route<dynamic> route) => false);
             } else if (iconText == 'Drug Info') {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MainForum(
-                        title: 'Forum',
-                        currentCategory: 'Drug Info',
-                      )));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Drug Info')),
+                  (Route<dynamic> route) => false);
             } else if (iconText == 'Covid Info') {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MainForum(
-                        title: 'Forum',
-                        currentCategory: 'Covid Info',
-                      )));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Covid Info')),
+                  (Route<dynamic> route) => false);
             } else if (iconText == 'My Discussion') {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => MainForum(
-                        title: 'Forum',
-                        currentCategory: 'My Discussion',
-                      )));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'My Discussion')),
+                  (Route<dynamic> route) => false);
             }
           },
         ),
@@ -303,6 +316,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final debouncer = Debouncer(milliseconds: 500);
     return Scaffold(
       appBar: AppBar(
           // The search area here
@@ -316,9 +330,11 @@ class _SearchPageState extends State<SearchPage> {
             controller: nameHolder,
             onChanged: (value) {
               searchResults.clear();
-              searchDjango(value);
+              debouncer.run(() {
+                searchDjango(value);
+              });
             },
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
@@ -326,7 +342,7 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: clearTextInput,
                 ),
                 hintText: 'Search...',
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.grey),
                 border: InputBorder.none),
           ),
         ),
@@ -409,4 +425,21 @@ class HexColor extends Color {
   }
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+}
+
+class Debouncer{
+  int milliseconds;
+  VoidCallback? action;
+  Timer? _timer;
+ 
+  Debouncer({required this.milliseconds});
+ 
+  run(VoidCallback action) {
+    if (null != _timer) {
+      _timer!.cancel();
+    }
+
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+
+  }
 }

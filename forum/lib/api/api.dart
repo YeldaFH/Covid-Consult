@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:forum/models/model.dart';
 import 'package:http/http.dart' as http;
-import 'package:covid_consult/cookie/CookieRequest.dart';
+import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
 
 
 class PostForum {
-  Future<List<Post>> getForumCategory(CookieRequest request,String category) async {
+  Future<List<Post>> getForumCategory(NetworkService request,String category) async {
     // print(category);
     if (category == 'All Category') {
       category = 'all';
@@ -21,9 +21,8 @@ class PostForum {
       
       String url = "http://10.0.2.2:8000/forum/api/user/";
       final response = await request.get(url);
-      final data = jsonDecode(utf8.decode(response.bodyBytes));
       List<Post> post = [];
-      for (var d in data) {
+      for (var d in response) {
         if (d != null) {
           post.add(Post.fromJson(d));
         }
@@ -60,16 +59,16 @@ class PostForum {
     }
   }
 
-  Future<dynamic> addNewForum(Post forum) async {
-    var url = Uri.parse('http://127.0.0.1/8000/forum/postNewForum/');
-    var response = await http.post(url,
-        headers: {
-          "Access-Control_Allow_Origin": "*",
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        body: jsonEncode(forum));
-    return jsonDecode(response.body)["success"];
-  }
+  // Future<dynamic> addNewForum(Post forum) async {
+  //   var url = Uri.parse('http://127.0.0.1/8000/forum/postNewForum/');
+  //   var response = await http.post(url,
+  //       headers: {
+  //         "Access-Control_Allow_Origin": "*",
+  //         "Content-Type": "application/json; charset=utf-8",
+  //       },
+  //       body: jsonEncode(forum));
+  //   return jsonDecode(response.body)["success"];
+  // }
 }
 
 class SearchService {

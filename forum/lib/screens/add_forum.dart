@@ -1,7 +1,7 @@
 // import 'package:covid_consult/widgets/main_drawer.dart';
-import 'package:covid_consult/cookie/CookieRequest.dart';
+import 'package:covid_consult/common/network_service.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:forum/api/api.dart';
 import 'package:forum/forum.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
@@ -17,7 +17,6 @@ class AddForum extends StatefulWidget {
 class Add_Forum extends State<AddForum> {
   final _formKey = GlobalKey<FormState>();
   final _categories = ['General Discussion', 'Covid Info', 'Drug Info'];
-  PostForum postForum = PostForum();
   // Saved variables to be submitted
   String _title = "";
   String _content = "";
@@ -34,7 +33,8 @@ class Add_Forum extends State<AddForum> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    final request = context.watch<NetworkService>();
+    var _user = request.username;
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
       appBar: AppBar(
@@ -58,8 +58,8 @@ class Add_Forum extends State<AddForum> {
                   ),
                 ),
               ),
-              const Text(
-                'by user1',
+              Text(
+                'by '+ _user,
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 20),
@@ -153,10 +153,9 @@ class Add_Forum extends State<AddForum> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // ignore: deprecated_member_use
-                    RaisedButton(
-                      child: const Text("Post to Forum"),
-                      onPressed: () async {
+                      BouncingWidget(
+                        scaleFactor: 1.5,
+                        onPressed: () async {
                         if (_formKey.currentState?.validate() ?? true) {
                           final response = await request.postJson(
                             'http://10.0.2.2:8000/forum/postNewForum/',
@@ -167,6 +166,11 @@ class Add_Forum extends State<AddForum> {
                             }),
                           );
                           if (response['status'] == 'success') {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Successfully created forum!"),
+                            ));
+                            Navigator.pop(context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -174,18 +178,40 @@ class Add_Forum extends State<AddForum> {
                                         title: 'Forum',
                                         currentCategory: 'All Category')));
                           }
+                          else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content:
+                                  Text("An error occured, please try again."),
+                            ));
+                          }
                         }
                       },
-                      color: const Color(0xff6B46C1),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: const BorderSide(
-                            color: Color(0xff6B46C1),
-                          )),
-                    ),
+                        child: Container(
+                          height: 35,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(45.0),
+                            color: const Color(0xff6B46C1),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Post to Forum',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  
                   ],
                 ),
               ),
+            
+            
             ],
           ),
         ),

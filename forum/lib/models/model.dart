@@ -43,47 +43,6 @@ class Post {
         "namaPenulis": namaPenulis,
       };
 }
-class ForumFlutter {
-  late String judul;
-  late String kategori;
-  late String isi;
-  late String dateTime;
-  late String warna;
-  late String namaPenulis;
-  late int penulis;
-  late String strings;
-
-  ForumFlutter({
-      required this.judul,
-      required this.kategori,
-      required this.isi,
-      required this.dateTime,
-      required this.warna,
-      required this.namaPenulis,
-      required this.penulis,
-      required this.strings
-      });
-  factory ForumFlutter.fromJson(Map<String, dynamic> json) => ForumFlutter(
-        judul: json["fields"]["judul"],
-        kategori: json["fields"]["kategori"],
-        isi: json["fields"]["isi"],
-        penulis: json["fields"]["penulis"],
-        dateTime: json["fields"]["DateTime"],
-        warna: json["fields"]["warna"],
-        strings: json["fields"]["strings"],
-        namaPenulis: json["fields"]["namaPenulis"],
-      );
-  Map<String, dynamic> toJson() => {
-        "judul": judul,
-        "kategori": kategori,
-        "isi": isi,
-        "penulis": penulis,
-        "DateTime": dateTime,
-        "warna": warna,
-        "strings": strings,
-        "namaPenulis": namaPenulis,
-      };
-}
 
 class Comment {
   late int id;
