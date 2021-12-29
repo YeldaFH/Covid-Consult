@@ -61,7 +61,7 @@ class MainDrawer extends StatelessWidget {
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainForum(title: 'Forum')));
           }),
           buildListTile('Article', Icons.article, () {
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainArticle(title: 'Article')));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainArticle(title: 'Article')));
           }),
           buildListTile('Obatpedia', Icons.medication, () {
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainObatpedia(title: 'Obatpedia')));

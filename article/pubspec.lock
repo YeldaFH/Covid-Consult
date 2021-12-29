@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  bouncing_widget:
-    dependency: transitive
-    description:
-      name: bouncing_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   characters:
     dependency: transitive
     description:
@@ -114,6 +107,20 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.4"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   js:
     dependency: transitive
     description:
@@ -213,14 +220,14 @@ packages:
     source: path
     version: "0.0.1"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.1"
   search_page:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: search_page
       url: "https://pub.dartlang.org"
