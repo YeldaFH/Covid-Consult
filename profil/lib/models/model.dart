@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Fields {
     Fields({
         required this.user,
