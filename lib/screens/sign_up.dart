@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:covid_consult/screens/login_page.dart';
+import 'package:covid_consult/screens/sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -17,6 +17,11 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  final snackBar = SnackBar(
+    content: const Text("Account has been successfully registered!"),
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.pink.shade500,
+  );
   bool isPasswordVisible = false;
   void togglePasswordView() {
     setState(() {
@@ -43,35 +48,66 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Form(
         key: _formKey,
         child: Scaffold(
-          backgroundColor: Colors.purpleAccent.shade400,
+          backgroundColor: const Color(0xFF383838),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Center(
-                  child: Text(
-                    'Covid Consult',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 60,
-                        fontWeight: FontWeight.bold),
+                Container(
+                  margin: const EdgeInsets.only(top: 50.0),
+                  child: const Center(
+                    child: Text(
+                      "✨ Hello ✨ ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24),
+                    ),
                   ),
                 ),
-
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                const Center(
+                  child: Text(
+                    "Sign up to get started",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
                 // Username
-                Padding(
+                Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 10.0),
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey.shade100),
+                    cursorColor: Colors.grey.shade100,
                     decoration: InputDecoration(
+                      fillColor: Colors.deepPurple.shade50,
                       hintText: "Masukkan Username",
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
                       labelText: "Username",
                       labelStyle: TextStyle(color: Colors.grey.shade300),
-                      icon: const Icon(Icons.attach_email),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
+                      floatingLabelStyle:
+                          const TextStyle(color: Color(0xFF9F7AEA)),
+                      icon: const Icon(
+                        Icons.person,
+                        color: Color(0xFF9F7AEA),
+                      ),
+                      border: const OutlineInputBorder(),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                      ),
                     ),
                     onChanged: (String? value) {
                       setState(() {
@@ -98,15 +134,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 10.0),
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey.shade100),
+                    cursorColor: Colors.grey.shade100,
                     decoration: InputDecoration(
-                      hintText: "Masukkan Nama Lengkap",
-                      labelText: "Nama Lengkap",
+                      fillColor: Colors.deepPurple.shade50,
+                      hintText: "Masukkan Nama",
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
+                      labelText: "Nama",
                       labelStyle: TextStyle(color: Colors.grey.shade300),
-                      icon: const Icon(Icons.attach_email),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
+                      floatingLabelStyle:
+                          const TextStyle(color: Color(0xFF9F7AEA)),
+                      icon: const Icon(
+                        Icons.person,
+                        color: Color(0xFF9F7AEA),
+                      ),
+                      border: const OutlineInputBorder(),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                      ),
                     ),
                     onChanged: (String? value) {
                       setState(() {
@@ -133,15 +182,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 10.0),
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey.shade100),
+                    cursorColor: Colors.grey.shade100,
                     decoration: InputDecoration(
+                      fillColor: Colors.deepPurple.shade50,
                       hintText: "Masukkan Email",
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
                       labelText: "Email",
                       labelStyle: TextStyle(color: Colors.grey.shade300),
-                      icon: const Icon(Icons.attach_email),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
+                      floatingLabelStyle:
+                          const TextStyle(color: Color(0xFF9F7AEA)),
+                      icon: const Icon(
+                        Icons.email,
+                        color: Color(0xFF9F7AEA),
+                      ),
+                      border: const OutlineInputBorder(),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                      ),
                     ),
                     onChanged: (String? value) {
                       setState(() {
@@ -168,20 +230,82 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
 
+                // Password
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 10.0),
+                  child: TextFormField(
+                    obscureText: true,
+                    style: TextStyle(color: Colors.grey.shade100),
+                    cursorColor: Colors.grey.shade100,
+                    decoration: InputDecoration(
+                      fillColor: Colors.deepPurple.shade50,
+                      hintText: "Masukkan Password",
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
+                      labelText: "Password",
+                      labelStyle: TextStyle(color: Colors.grey.shade300),
+                      floatingLabelStyle:
+                          const TextStyle(color: Color(0xFF9F7AEA)),
+                      icon: const Icon(
+                        Icons.lock,
+                        color: Color(0xFF9F7AEA),
+                      ),
+                      border: const OutlineInputBorder(),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                      ),
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        password1 = value!;
+                      });
+                    },
+                    onSaved: (String? value) {
+                      setState(() {
+                        password1 = value!;
+                      });
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Password tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
                 // No. HP
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 10.0),
                   child: TextFormField(
-                    style: const TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.grey.shade100),
+                    cursorColor: Colors.grey.shade100,
                     decoration: InputDecoration(
-                      hintText: "Masukkan Nomor Ponsel",
-                      labelText: "Nomor Ponsel",
+                      fillColor: Colors.deepPurple.shade50,
+                      hintText: "Masukkan Nomor Hp",
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
+                      labelText: "Nomor Hp",
                       labelStyle: TextStyle(color: Colors.grey.shade300),
-                      icon: const Icon(Icons.attach_email),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
+                      floatingLabelStyle:
+                          const TextStyle(color: Color(0xFF9F7AEA)),
+                      icon: const Icon(
+                        Icons.phone_android,
+                        color: Color(0xFF9F7AEA),
+                      ),
+                      border: const OutlineInputBorder(),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                      ),
                     ),
                     onChanged: (String? value) {
                       setState(() {
@@ -216,19 +340,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 25.0, vertical: 10.0),
                       child: TextFormField(
-                        style: const TextStyle(color: Colors.black),
-                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey.shade100),
+                        // textAlign: TextAlign.center,
                         enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _dateController,
                         decoration: InputDecoration(
                           hintText: "Masukkan Tanggal Lahir",
+                          hintStyle: TextStyle(color: Colors.grey.shade500),
                           labelText: "Tanggal Lahir",
                           labelStyle: TextStyle(color: Colors.grey.shade300),
-                          icon: const Icon(Icons.attach_email),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0)),
-                          hintStyle: TextStyle(color: Colors.grey.shade300),
+                          floatingLabelStyle:
+                              const TextStyle(color: Color(0xFF9F7AEA)),
+                          icon: const Icon(
+                            Icons.calendar_today,
+                            color: Color(0xFF9F7AEA),
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
+                          ),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  // color: Color(0xFF9F7AEA), width: 1.0),
+                                  color: Colors.white,
+                                  width: 1.0)),
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (dob) {
@@ -243,18 +383,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Gender
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25.0, vertical: 10.0),
-                  child: const Text(
-                    'Radio Button',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25.0, vertical: 10.0),
+                    child: Container(
+                        padding: const EdgeInsets.fromLTRB(40, 10, 0, 1),
+                        child: Text(
+                          'Jenis Kelamin',
+                          style: TextStyle(
+                              color: Colors.grey.shade300,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16),
+                        ))),
 
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5),
+                  padding: const EdgeInsets.fromLTRB(60, 0, 40, 10),
                   child: Row(
                     children: [
                       Radio(
@@ -266,9 +408,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      const Text(
-                        'Male',
-                        style: TextStyle(fontSize: 16.0),
+                      Text('Laki - laki',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.grey.shade300,
+                          )),
+                      const SizedBox(
+                        width: 10,
                       ),
                       Radio(
                         value: "female",
@@ -279,12 +425,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      const Text(
-                        'Female',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
+                      Text('Perempuan',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.grey.shade300,
+                          )),
                     ],
                   ),
                 ),
@@ -292,19 +437,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // Role
                 Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 25.0, vertical: 10.0),
+                        horizontal: 25.0, vertical: 4.0),
                     child: Container(
-                        padding: const EdgeInsets.all(10),
-                        child: const Text(
-                          'I\'m a',
+                        padding: const EdgeInsets.fromLTRB(40, 10, 0, 1),
+                        child: Text(
+                          'Saya adalah seorang ',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.grey.shade300,
                               fontWeight: FontWeight.w500,
                               fontSize: 16),
                         ))),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25.0, vertical: 10.0),
+                  padding: const EdgeInsets.fromLTRB(60, 0, 40, 10),
                   child: Row(
                     children: [
                       Radio(
@@ -316,9 +460,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      const Text(
-                        'Doctor',
-                        style: TextStyle(fontSize: 16.0),
+                      Text(
+                        'Dokter',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.grey.shade300,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 30,
                       ),
                       Radio(
                         value: "patient",
@@ -329,52 +479,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                       ),
-                      const Text(
-                        'Patient/Visitor',
+                      Text(
+                        'Pasien/Pengunjung',
                         style: TextStyle(
                           fontSize: 16.0,
+                          color: Colors.grey.shade300,
                         ),
                       ),
                     ],
-                  ),
-                ),
-
-                // Password
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25.0, vertical: 10.0),
-                  child: TextFormField(
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      hintText: "Masukkan Password",
-                      labelText: "Password",
-                      labelStyle: TextStyle(color: Colors.grey.shade300),
-                      icon: const Icon(
-                        Icons.lock_outline,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
-                    ),
-                    onChanged: (String? value) {
-                      setState(() {
-                        password1 = value!;
-                      });
-                    },
-                    onSaved: (String? value) {
-                      setState(() {
-                        password1 = value!;
-                      });
-                    },
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Password tidak boleh kosong';
-                      }
-                      return null;
-                    },
                   ),
                 ),
 
@@ -384,12 +496,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Center(
                   child: Container(
                     height: size.height * 0.08,
-                    width: size.width * 0.8,
+                    width: size.width * 0.825,
+                    margin: EdgeInsets.fromLTRB(size.width * 0.08, 0, 0, 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: const Color(0xFF24262A),
                     ),
-                    child: TextButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF9F7AEA)),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           // Submit to Django server and wait for response
@@ -407,14 +522,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               }));
                           if (response['status'] == 'success') {
                             ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text(
-                                  "Account has been successfully registered!"),
-                            ));
+                                .showSnackBar(snackBar);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
+                                    builder: (context) =>
+                                        const SignInScreen()));
                           } else {
                             if (response['status'] == 'User Exists') {
                               ScaffoldMessenger.of(context)
@@ -435,10 +548,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: const Text(
                         'Buat Akun',
                         style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.white,
-                            height: 1.5,
-                            fontWeight: FontWeight.bold),
+                            color: Colors.white70,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),
@@ -450,24 +562,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account?',
-                      style: TextStyle(
-                          fontSize: 22, color: Colors.white, height: 1.5),
+                      "Already have an Account ? ",
+                      style: TextStyle(color: Colors.white70),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()));
-                      },
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInScreen())),
                       child: const Text(
-                        'Login',
+                        'Sign In',
                         style: TextStyle(
-                            fontSize: 22,
-                            color: Colors.white,
-                            height: 1.5,
-                            fontWeight: FontWeight.bold),
+                            // fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF9F7AEA),
+                            height: 1.5),
                       ),
                     ),
                   ],
