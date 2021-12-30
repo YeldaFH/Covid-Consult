@@ -120,7 +120,7 @@ class AddReplyState extends State<AddReplySearch> {
                             var data = komen.id;
                             // print(data);
                             String url =
-                                "http://covid-consult.herokuapp.com/forum/replyCommentNewForum/$data/";
+                                "https://covid-consult.herokuapp.com/forum/replyCommentNewForum/$data/";
                             // print(url);
                             final response = await request.postJson(
                               url,

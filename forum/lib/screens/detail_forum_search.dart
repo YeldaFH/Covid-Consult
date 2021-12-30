@@ -131,7 +131,7 @@ class DetailForumSearchState extends State<DetailForumSearch> {
                           if (_formKey.currentState?.validate() ?? true) {
                             var data = dataForum['id'];
                             String url =
-                                "http://covid-consult.herokuapp.com/forum/commentNewForum/$data/";
+                                "https://covid-consult.herokuapp.com/forum/commentNewForum/$data/";
                             final response = await request.postJson(
                               url,
                               convert.jsonEncode(<String, String>{
