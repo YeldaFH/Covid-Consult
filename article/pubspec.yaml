@@ -11,10 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
   #biar bisa balik ke app mainnya
   covid_consult:
     path: ../.
+  provider: ^6.0.1
+  http: ^0.13.4
+  search_page: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
