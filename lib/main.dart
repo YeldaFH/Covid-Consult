@@ -8,6 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static const String title = 'HomePage';
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -20,12 +21,12 @@ class MyApp extends StatelessWidget {
           return request;
         },
         child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-              primarySwatch: Colors.deepPurple,
-              unselectedWidgetColor: Colors.deepPurple.shade200),
-          home: const SignInScreen(),
           debugShowCheckedModeBanner: false,
+          darkTheme: ThemeData(
+              brightness: Brightness.dark, primarySwatch: Colors.deepPurple),
+          themeMode: ThemeMode.dark,
+          title: title,
+          home: const SignInScreen(),
         ));
   }
 }

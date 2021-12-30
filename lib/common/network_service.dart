@@ -3,8 +3,6 @@
 // Taken from https://github.com/reflekt-io/echo/blob/main/lib/common/network_service.dart
 // Thank you Athal
 
-// ignore_for_file: avoid_print
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -71,13 +69,13 @@ class NetworkService {
       role = json.decode(response.body)['role'];
       gender = json.decode(response.body)['gender'];
 
-      print(username);
-      print(name);
-      print(dob);
-      print(email);
-      print(phoneNum);
-      print(role);
-      print(gender);
+      // print(username);
+      // print(name);
+      // print(dob);
+      // print(email);
+      // print(phoneNum);
+      // print(role);
+      // print(gender);
     } else {
       loggedIn = false;
     }
