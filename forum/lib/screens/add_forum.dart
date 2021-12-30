@@ -1,6 +1,4 @@
-// import 'package:covid_consult/widgets/main_drawer.dart';
 // ignore_for_file: use_key_in_widget_constructors, camel_case_types, duplicate_ignore, prefer_const_constructors
-
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
