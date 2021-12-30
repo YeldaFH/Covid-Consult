@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:article/models/model.dart';
 import 'package:article/widget/card.dart';
 import 'add_article.dart';
-import 'package:covid_consult/common/network_service.dart';
+import 'package:covid_consult/cookie/CookieRequest.dart';
 import 'package:search_page/search_page.dart';
 
 import 'detailArticle.dart';
@@ -206,8 +206,8 @@ class _MainArticleState extends State<MainArticle> {
       );
 
    Future<List<Model>> fetchKutipan() async {
-    final request = context.watch<NetworkService>();
-    String url = 'https://covid-consult.herokuapp.com/article/getArtikelFlutter';
+    final request = context.watch<CookieRequest>();
+    String url = 'http://10.0.2.2:8000/article/getArtikelFlutter';
 
     final response = await request.get(url);
 
@@ -221,4 +221,3 @@ class _MainArticleState extends State<MainArticle> {
   }
 
 }
-

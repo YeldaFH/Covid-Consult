@@ -1,9 +1,9 @@
+import 'package:covid_consult/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:forum/forum.dart';
 import 'package:obatpedia/obatpedia.dart';
 import 'package:profil/profil.dart';
 import 'package:article/article.dart';
-import 'package:covid_consult/main.dart';
 // import 'package:consultation/consultation.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -52,25 +52,22 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainPage(title: 'Homepage')));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MyHomePage(title: 'HomePage')));
           }),          
           buildListTile('Consultation', Icons.receipt_rounded, () {
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainConsultation(title: 'Consultation')));
           }),
           buildListTile('Forum', Icons.forum, () {
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainForum(title: 'Forum')));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => MainForum(title: 'Forum',currentCategory: 'All Category')));
+          }),
+          buildListTile('Obatpedia', Icons.medication, () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainObatpedia(title: 'Obatpedia')));
           }),
           buildListTile('Article', Icons.article, () {
             Navigator.push(context,MaterialPageRoute(builder: (context) => const MainArticle(title: 'Article')));
           }),
-          buildListTile('Obatpedia', Icons.medication, () {
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainObatpedia(title: 'Obatpedia')));
-          }),
-          buildListTile('Admin', Icons.login, () {
-            // Navigator.pop(context);
-          }),
           buildListTile('Profile', Icons.supervised_user_circle, () {
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainProfile(title: 'Obatpedia')));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainProfile(title: 'Obatpedia')));
           }),
           buildListTile('Logout', Icons.login, () {
             Navigator.pop(context);

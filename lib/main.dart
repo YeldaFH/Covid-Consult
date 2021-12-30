@@ -1,7 +1,5 @@
-
-import 'package:covid_consult/screens/homepage.dart';
 import 'package:flutter/material.dart';
-// import 'package:covid_consult/screens/login_page.dart';
+import 'package:covid_consult/screens/login_page.dart';
 // import 'package:covid_consult/screens/sign_up.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +23,7 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark, primarySwatch: Colors.purple),
         themeMode: ThemeMode.dark,
         title: title,
-        // home: const LoginScreen(),
-        home: MyHomePage(title: 'HomePage',),
+        home: const LoginScreen(),
     ));
   }
 }
