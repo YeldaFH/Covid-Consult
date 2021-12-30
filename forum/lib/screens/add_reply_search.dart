@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, no_logic_in_create_state
+
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:forum/screens/detail_forum.dart';
@@ -16,7 +18,7 @@ class AddReplySearch extends StatefulWidget {
   AddReplySearch(this.komen, this.dataForum);
   @override
   State<StatefulWidget> createState() {
-    return AddReplyState(this.komen, this.dataForum);
+    return AddReplyState(komen, dataForum);
   }
 }
 
@@ -26,7 +28,7 @@ class AddReplyState extends State<AddReplySearch> {
   var dataForum;
   String _reply = "";
 
-  AddReplyState(this.komen,this.dataForum);
+  AddReplyState(this.komen, this.dataForum);
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -135,9 +137,9 @@ class AddReplyState extends State<AddReplySearch> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => DetailForumSearch(dataForum)));
-                            }
-                            else {
+                                      builder: (_) =>
+                                          DetailForumSearch(dataForum)));
+                            } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
                                 content:

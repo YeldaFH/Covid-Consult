@@ -20,6 +20,12 @@ class NetworkService {
   bool loggedIn = false;
   bool initialized = false; //initialized cookies
   String username = "";
+  String name = "";
+  DateTime dob = DateTime.now();
+  String email = "";
+  String phoneNum = "";
+  String role = "";
+  String gender = "";
 
   // Future nunggu dulu data (async juga)
   Future init(BuildContext context) async {
@@ -56,6 +62,20 @@ class NetworkService {
       loggedIn = true;
       //ngambil uname dari sini pake request.username
       username = json.decode(response.body)['username'];
+      name = json.decode(response.body)['name'];
+      dob = DateTime.parse(json.decode(response.body)['dob']);
+      email = json.decode(response.body)['email'];
+      phoneNum = json.decode(response.body)['phone_num'];
+      role = json.decode(response.body)['role'];
+      gender = json.decode(response.body)['gender'];
+
+      // print(username);
+      // print(name);
+      // print(dob);
+      // print(email);
+      // print(phoneNum);
+      // print(role);
+      // print(gender);
     } else {
       loggedIn = false;
     }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_const_constructors_in_immutables, prefer_const_constructors, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, prefer_is_empty, non_constant_identifier_names, unused_field, duplicate_ignore, sized_box_for_whitespace
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -397,23 +399,22 @@ class _SearchPageState extends State<SearchPage> {
                 style: TextStyle(fontSize: 20),
               ),
             )
-          : 
-      ListView(
-        children: <Widget>[
-          const SizedBox(
-            height: 10.0,
-          ),
-          ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
-            itemCount: searchResults.length,
-            itemBuilder: (BuildContext context, int index) {
-              return buildResultCard(searchResults[index]);
-            },
-          ),
-        ],
-      ),
+          : ListView(
+              children: <Widget>[
+                const SizedBox(
+                  height: 10.0,
+                ),
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: searchResults.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return buildResultCard(searchResults[index]);
+                  },
+                ),
+              ],
+            ),
     );
   }
 
