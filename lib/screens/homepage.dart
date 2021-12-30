@@ -9,6 +9,7 @@ import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:obatpedia/obatpedia.dart';
 
 void main() {
   runApp(const MyApp());
@@ -198,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           iconSize: 80,
                           tooltip: 'ObatPedia',
                           onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
+                            Navigator.push(context,MaterialPageRoute(builder: (_) => MainObatpedia(title: 'ObatPedia',)));
                           },
                         ),
                       ])),
