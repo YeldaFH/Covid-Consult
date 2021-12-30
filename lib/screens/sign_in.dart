@@ -192,8 +192,9 @@ class _SignInScreen extends State<SignInScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MyHomePage()));
+                                      builder: (context) => const MyHomePage(
+                                            title: 'Covid Consult',
+                                          )));
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
