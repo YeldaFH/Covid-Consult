@@ -96,12 +96,12 @@ class _MainProfileState extends State<MainProfile> {
                         ),
                       ),
                       Card(
-                        margin: EdgeInsets.only(top: 20),
+                        margin: const EdgeInsets.only(top: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+                          padding: const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
                           child: Column(children: [
                           const Text(
                             "User Data",
@@ -112,56 +112,56 @@ class _MainProfileState extends State<MainProfile> {
                               color: Colors.white
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(children: [
-                            Text("Name" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 91,),
-                            Text(name, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("Name" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 91,),
+                            Text(name, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("Gender" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 84,),
-                            Text(gender, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("Gender" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 84,),
+                            Text(gender, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("Birth Date" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 65,),
-                            Text(dob, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("Birth Date" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 65,),
+                            Text(dob, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("E-Mail" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 92,),
-                            Text(email , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("E-Mail" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 92,),
+                            Text(email , style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("Phone Number" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 29,),
-                            Text(phoneNum, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("Phone Number" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 29,),
+                            Text(phoneNum, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("User Type" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 66,),
-                            Text(role, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("User Type" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 66,),
+                            Text(role, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(children: [
-                            Text("Username" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
-                            SizedBox(width: 64,),
-                            Text(user, style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const Text("Username" , style: TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
+                            const SizedBox(width: 64,),
+                            Text(user, style: const TextStyle(fontFamily: 'Mulish', fontSize: 16, color: Colors.white),),
                           ],),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                             TextButton(
                               child: const Text("EDIT", style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(
                                   builder: (context) =>
-                                      EditProfile()));
+                                      const EditProfile()));
                               },
                             )
                           ],),

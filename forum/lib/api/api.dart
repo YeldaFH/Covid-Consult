@@ -58,17 +58,6 @@ class PostForum {
       return Future.error(e);
     }
   }
-
-  // Future<dynamic> addNewForum(Post forum) async {
-  //   var url = Uri.parse('http://127.0.0.1/8000/forum/postNewForum/');
-  //   var response = await http.post(url,
-  //       headers: {
-  //         "Access-Control_Allow_Origin": "*",
-  //         "Content-Type": "application/json; charset=utf-8",
-  //       },
-  //       body: jsonEncode(forum));
-  //   return jsonDecode(response.body)["success"];
-  // }
 }
 
 class SearchService {

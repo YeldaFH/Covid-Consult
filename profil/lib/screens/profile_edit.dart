@@ -48,7 +48,6 @@ class _EditProfile extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
-    var _user = request.username;
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
       appBar: AppBar(
@@ -77,14 +76,14 @@ class _EditProfile extends State<EditProfile> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  if (value != null || !value!.isEmpty) {
+                  if (value != null || value!.isNotEmpty) {
                       _name = value;
                   } else {_name = '';}
                 });
               },
               onSaved: (String? value) {
                 setState(() {
-                  if (value != null || !value!.isEmpty) {
+                  if (value != null || value!.isNotEmpty) {
                       _name = value;
                   } else {_name = '';}
                 });
@@ -97,30 +96,28 @@ class _EditProfile extends State<EditProfile> {
                 onTap: () {
                   _selectDate(context);
                 },
-                child: Container(
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    enabled: false,
-                    keyboardType: TextInputType.text,
-                    controller: _dateController,
-                    decoration: InputDecoration(
-                      fillColor: Colors.deepPurple.shade50,
-                      hintText: "Insert birth date here ...",
-                      labelText: "Birth Date",
-                      icon: const Icon(Icons.calendar_today),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(7.0)),
-                      hintStyle: TextStyle(color: Colors.grey.shade300),
-                      labelStyle: TextStyle(color: Colors.grey.shade300),
-                    ),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (dob) {
-                      if (dob ==
-                          DateFormat('yyyy-MM-dd').format(DateTime.now())) {
-                        return 'Please enter valid date of birth';
-                      }
-                      return null;
-                    },
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  enabled: false,
+                  keyboardType: TextInputType.text,
+                  controller: _dateController,
+                  decoration: InputDecoration(
+                    fillColor: Colors.deepPurple.shade50,
+                    hintText: "Insert birth date here ...",
+                    labelText: "Birth Date",
+                    icon: const Icon(Icons.calendar_today),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(7.0)),
+                    hintStyle: TextStyle(color: Colors.grey.shade300),
+                    labelStyle: TextStyle(color: Colors.grey.shade300),
                   ),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (dob) {
+                    if (dob ==
+                        DateFormat('yyyy-MM-dd').format(DateTime.now())) {
+                      return 'Please enter valid date of birth';
+                    }
+                    return null;
+                  },
                 )),
             const SizedBox(height: 20),
 
@@ -136,7 +133,7 @@ class _EditProfile extends State<EditProfile> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    if (value != null || !value!.isEmpty) {
+                    if (value != null || value!.isNotEmpty) {
                       _email = value;
                     } else {_email = '';}
         
@@ -144,7 +141,7 @@ class _EditProfile extends State<EditProfile> {
                 },
                 onSaved: (String? value) {
                   setState(() {
-                    if (value != null || !value!.isEmpty) {
+                    if (value != null || value!.isNotEmpty) {
                       _email = value;
                     } else {_email = '';}
                   });
@@ -176,14 +173,14 @@ class _EditProfile extends State<EditProfile> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  if (value != null || !value!.isEmpty) {
+                  if (value != null || value!.isNotEmpty) {
                       _phoneNum = value;
                     } else {_phoneNum = '';}
                 });
               },
               onSaved: (String? value) {
                 setState(() {
-                  if (value != null || !value!.isEmpty) {
+                  if (value != null || value!.isNotEmpty) {
                       _phoneNum = value;
                     } else {_phoneNum = '';}
                 });
