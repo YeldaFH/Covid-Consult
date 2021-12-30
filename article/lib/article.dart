@@ -204,7 +204,7 @@ class _MainArticleState extends State<MainArticle> {
 
   Future<List<Model>> fetchKutipan() async {
     final request = context.watch<NetworkService>();
-    String url = 'http://10.0.2.2:8000/article/getArtikelFlutter';
+    String url = 'https://covid-consult.herokuapp.com/article/getArtikelFlutter';
 
     final response = await request.get(url);
 
