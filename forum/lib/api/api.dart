@@ -19,7 +19,7 @@ class PostForum {
     } else{
       // category = 'user';
       
-      String url = "http://10.0.2.2:8000/forum/api/user/";
+      String url = "http://covid-consult.herokuapp.com/forum/api/user/";
       final response = await request.get(url);
       List<Post> post = [];
       for (var d in response) {
@@ -30,7 +30,7 @@ class PostForum {
       return post;
     }
     
-    String url = "http://10.0.2.2:8000/forum/api/$category/";
+    String url = "http://covid-consult.herokuapp.com/forum/api/$category/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Post> post = [];
@@ -42,7 +42,7 @@ class PostForum {
     return post;
   }
 
-  String baseUrl = "http://10.0.2.2:8000/apis/forum/?format=json";
+  String baseUrl = "http://covid-consult.herokuapp.com/apis/forum/?format=json";
   Future<List> getAllForum() async {
     try {
       var response = await http.get(Uri.parse(baseUrl));
@@ -73,7 +73,7 @@ class PostForum {
 
 class SearchService {
   static Future<String> searchForum(String query) async {
-    String url = 'http://10.0.2.2:8000/apis/forum/?search=$query';
+    String url = 'http://covid-consult.herokuapp.com/apis/forum/?search=$query';
     http.Response response = await http.get(Uri.parse(url));
     // print("search_service.dart: searchDjangoApi: ${response.body}");
     return response.body;
@@ -83,7 +83,7 @@ class SearchService {
 class CommentForumService {
   Future<List<Comment>> getComment(int dataForum) async {
     // print(dataForum);
-    String url = "http://10.0.2.2:8000/forum/commentForum/$dataForum/";
+    String url = "http://covid-consult.herokuapp.com/forum/commentForum/$dataForum/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Comment> comment = [];
@@ -99,7 +99,7 @@ class CommentForumService {
 class ReplyCommentForumService {
   Future<List<Reply>> getReply(int dataForum) async {
     // print(dataForum);
-    String url = "http://10.0.2.2:8000/forum/replyCommentForum/$dataForum/";
+    String url = "http://covid-consult.herokuapp.com/forum/replyCommentForum/$dataForum/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Reply> reply = [];

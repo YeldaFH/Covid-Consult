@@ -129,7 +129,7 @@ class DetailForumState extends State<DetailForum> {
                             var data = dataForum.id;
                             // print(data);
                             String url =
-                                "http://10.0.2.2:8000/forum/commentNewForum/$data/";
+                                "http://covid-consult.herokuapp.com/forum/commentNewForum/$data/";
                             // print(url);
                             final response = await request.postJson(
                               url,

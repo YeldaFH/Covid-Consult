@@ -117,7 +117,7 @@ class AddReplyState extends State<AddReply> {
                             var data = komen.id;
                             // print(data);
                             String url =
-                                "http://10.0.2.2:8000/forum/replyCommentNewForum/$data/";
+                                "http://covid-consult.herokuapp.com/forum/replyCommentNewForum/$data/";
                             // print(url);
                             final response = await request.postJson(
                               url,

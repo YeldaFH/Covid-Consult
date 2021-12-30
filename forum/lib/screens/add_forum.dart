@@ -158,7 +158,7 @@ class Add_Forum extends State<AddForum> {
                         onPressed: () async {
                         if (_formKey.currentState?.validate() ?? true) {
                           final response = await request.postJson(
-                            'http://10.0.2.2:8000/forum/postNewForum/',
+                            'http://covid-consult.herokuapp.com/forum/postNewForum/',
                             convert.jsonEncode(<String, String>{
                               'judul': _title,
                               'isi': _content,
