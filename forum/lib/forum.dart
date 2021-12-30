@@ -130,6 +130,11 @@ class _MainForumState extends State<MainForum> {
           FutureBuilder<List>(
             future: PostService.getForumCategory(request, currentCategory),
             builder: (context, snapshot) {
+              if(snapshot.data?.length==0){
+                return const Center(
+                  child: Text("0 Forum"),
+                );
+              }
               // print(snapshot);
 
               if (snapshot.hasData) {
