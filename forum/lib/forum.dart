@@ -130,7 +130,7 @@ class _MainForumState extends State<MainForum> {
           FutureBuilder<List>(
             future: PostService.getForumCategory(request, currentCategory),
             builder: (context, snapshot) {
-              if(snapshot.data?.length==0){
+              if (snapshot.data?.length == 0) {
                 return const Center(
                   child: Text("0 Forum"),
                 );
@@ -211,38 +211,30 @@ class _MainForumState extends State<MainForum> {
               return CircularProgressIndicator();
             },
           ),
-
         ],
       ),
       floatingActionButton: BouncingWidget(
-              scaleFactor: 1.5,
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => AddForum()));
-              },
-              child: Container(
-                width: 55,
-                height: 55,
-                decoration: const BoxDecoration(
-                  color: Color(0xff6B46C1), // border color
-                  shape: BoxShape.circle,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ),
+        scaleFactor: 1.5,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddForum()));
+        },
+        child: Container(
+          width: 55,
+          height: 55,
+          decoration: const BoxDecoration(
+            color: Color(0xff6B46C1), // border color
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30,
             ),
-      //   onPressed: () {
-      //     Navigator.push(
-      //         context, MaterialPageRoute(builder: (_) => AddForum()));
-      //   },
-      //   backgroundColor: const Color(0xff6B46C1),
-      //   child: const Icon(Icons.add, color: Colors.white),
-      // ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -262,23 +254,34 @@ class CategoryIcon extends StatelessWidget {
           onPressed: () {
             if (iconText == 'All Category') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'All Category')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'All Category')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'General Discussion') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'General Discussion')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum',
+                          currentCategory: 'General Discussion')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'Drug Info') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Drug Info')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'Drug Info')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'Covid Info') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Covid Info')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'Covid Info')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'My Discussion') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'My Discussion')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'My Discussion')),
                   (Route<dynamic> route) => false);
             }
           },
@@ -299,6 +302,7 @@ class SearchPage extends StatefulWidget {
 // Search Page
 class _SearchPageState extends State<SearchPage> {
   List<dynamic> searchResults = [];
+  bool _load = false;
   searchDjango(value) async {
     SearchService.searchForum(value).then((responseBody) {
       List<dynamic> data = jsonDecode(responseBody);
@@ -308,15 +312,45 @@ class _SearchPageState extends State<SearchPage> {
           searchResults.add(value);
         }
       });
-
-      // print(data.runtimeType.toString());
-      // print(searchResults.runtimeType.toString());
     });
   }
 
   var nameHolder = TextEditingController();
   clearTextInput() {
     nameHolder.clear();
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        Widget loadingIndicator = _load
+            ? AlertDialog(
+                title: Text("Searching..."),
+                content: Container(
+                  height: 100,
+                  child: Column(
+                    children: const <Widget>[
+                      CircularProgressIndicator(),
+                      Text("Please wait...")
+                    ],
+                  ),
+                ),
+              )
+            : Container();
+        return Align(
+          child: loadingIndicator,
+          alignment: FractionalOffset.center,
+        );
+      },
+    );
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _load = false;
+      });
+      Navigator.pop(context); //pop dialog
+    });
   }
 
   @override
@@ -334,9 +368,13 @@ class _SearchPageState extends State<SearchPage> {
           child: TextField(
             controller: nameHolder,
             onChanged: (value) {
-              searchResults.clear();
               debouncer.run(() {
-                searchDjango(value);
+                setState(() {
+                  searchResults = [];
+                  _load = true;
+                  _onLoading();
+                  searchDjango(value);
+                });
               });
             },
             style: const TextStyle(color: Colors.black),
@@ -352,7 +390,15 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       )),
-      body: ListView(
+      body: searchResults.isEmpty
+          ? const Center(
+              child: Text(
+                'No Result',
+                style: TextStyle(fontSize: 20),
+              ),
+            )
+          : 
+      ListView(
         children: <Widget>[
           const SizedBox(
             height: 10.0,
@@ -432,19 +478,18 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-class Debouncer{
+class Debouncer {
   int milliseconds;
   VoidCallback? action;
   Timer? _timer;
- 
+
   Debouncer({required this.milliseconds});
- 
-  run(VoidCallback action) {
+
+  void run(VoidCallback action) {
     if (null != _timer) {
       _timer!.cancel();
     }
 
     _timer = Timer(Duration(milliseconds: milliseconds), action);
-
   }
 }
