@@ -1,6 +1,8 @@
+// ignore_for_file: must_be_immutable, prefer_const_constructors, no_logic_in_create_state, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, unused_element
+
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
-import 'package:forum/screens/add_reply.dart';
+// import 'package:forum/screens/add_reply.dart';
 import 'package:forum/screens/add_reply_search.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -148,9 +150,9 @@ class DetailForumSearchState extends State<DetailForumSearch> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => DetailForumSearch(dataForum)));
-                            }
-                            else {
+                                      builder: (_) =>
+                                          DetailForumSearch(dataForum)));
+                            } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
                                 content:
@@ -231,61 +233,63 @@ class DetailForumSearchState extends State<DetailForumSearch> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-                    ExpansionTile(
-                      textColor: const Color.fromARGB(255, 208,170,243),
-                      iconColor:const Color.fromARGB(255, 208,170,243),
-                      title: Text(
-                        komen.namaPenulis,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      leading: CircleAvatar(
-                        backgroundColor: HexColor(komen.warna),
-                        foregroundColor: Colors.black,
-                        radius: 25,
-                        child: Text(
-                          komen.namaPenulis[0].toUpperCase(),
-                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      subtitle:
-                          Text(dateTime + "\n" + temp + '\nReply: ' + komen.jumlahReply),
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(komen.isi),
-                        ),
-                        FutureBuilder<List<Reply>>(
-                          future: replyService.getReply(komen.id),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              final List<Reply>? reply = snapshot.data;
-                              if (reply?.isNotEmpty ?? false) {
-                                return ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: reply?.length,
-                                    itemBuilder: (context, index) {
-                                      return buildReplyItem(reply![index]);
-                                    });
-                              } else {
-                                return const Text("0 Reply");
-                              }
-                            } else if (snapshot.hasError) {
-                              return Text("${snapshot.error}");
-                            }
-                            return CircularProgressIndicator();
-                          },
-                        ),
-                      ],
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => AddReplySearch(komen,dataForum)));
-                      }, child: const Text('Reply')),
-      
+            ExpansionTile(
+              textColor: const Color.fromARGB(255, 208, 170, 243),
+              iconColor: const Color.fromARGB(255, 208, 170, 243),
+              title: Text(
+                komen.namaPenulis,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              leading: CircleAvatar(
+                backgroundColor: HexColor(komen.warna),
+                foregroundColor: Colors.black,
+                radius: 25,
+                child: Text(
+                  komen.namaPenulis[0].toUpperCase(),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              subtitle: Text(
+                  dateTime + "\n" + temp + '\nReply: ' + komen.jumlahReply),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(komen.isi),
+                ),
+                FutureBuilder<List<Reply>>(
+                  future: replyService.getReply(komen.id),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final List<Reply>? reply = snapshot.data;
+                      if (reply?.isNotEmpty ?? false) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: reply?.length,
+                            itemBuilder: (context, index) {
+                              return buildReplyItem(reply![index]);
+                            });
+                      } else {
+                        return const Text("0 Reply");
+                      }
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
+              ],
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => AddReplySearch(komen, dataForum)));
+                },
+                child: const Text('Reply')),
           ],
-
         ),
       ),
     );
@@ -305,8 +309,7 @@ class DetailForumSearchState extends State<DetailForumSearch> {
         radius: 25,
         child: Text(
           reply.namaPenulis[0].toUpperCase(),
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       title: Text(reply.namaPenulis + '\n' + dateTime),

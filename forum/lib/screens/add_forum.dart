@@ -1,4 +1,6 @@
 // import 'package:covid_consult/widgets/main_drawer.dart';
+// ignore_for_file: use_key_in_widget_constructors, camel_case_types, duplicate_ignore, prefer_const_constructors
+
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,7 @@ class Add_Forum extends State<AddForum> {
                 ),
               ),
               Text(
-                'by '+ _user,
+                'by ' + _user,
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 20),
@@ -101,15 +103,15 @@ class Add_Forum extends State<AddForum> {
                     return buildMenuItem(value);
                   }).toList(),
                   onChanged: (String? value) => setState(() {
-                        if(value != null) {
-                          if(value == "General Discussion") {
-                            _category = 'general';
-                          } else if(value == "Covid Info") {
-                            _category = 'covid';
-                          } else if(value == "Drug Info") {
-                            _category = 'drug';
-                          }
-                        }
+                    if (value != null) {
+                      if (value == "General Discussion") {
+                        _category = 'general';
+                      } else if (value == "Covid Info") {
+                        _category = 'covid';
+                      } else if (value == "Drug Info") {
+                        _category = 'drug';
+                      }
+                    }
                     value = value as String;
                   }),
                   onSaved: (String? value) {
@@ -153,9 +155,9 @@ class Add_Forum extends State<AddForum> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                      BouncingWidget(
-                        scaleFactor: 1.5,
-                        onPressed: () async {
+                    BouncingWidget(
+                      scaleFactor: 1.5,
+                      onPressed: () async {
                         if (_formKey.currentState?.validate() ?? true) {
                           final response = await request.postJson(
                             'http://covid-consult.herokuapp.com/forum/postNewForum/',
@@ -177,8 +179,7 @@ class Add_Forum extends State<AddForum> {
                                     builder: (_) => MainForum(
                                         title: 'Forum',
                                         currentCategory: 'All Category')));
-                          }
-                          else {
+                          } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content:
@@ -187,31 +188,28 @@ class Add_Forum extends State<AddForum> {
                           }
                         }
                       },
-                        child: Container(
-                          height: 35,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(45.0),
-                            color: const Color(0xff6B46C1),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Post to Forum',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                      child: Container(
+                        height: 35,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(45.0),
+                          color: const Color(0xff6B46C1),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Post to Forum',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ),
                       ),
-                  
+                    ),
                   ],
                 ),
               ),
-            
-            
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bouncing_widget/bouncing_widget.dart';
 // import 'package:covid_consult/common/network_service.dart';
 // import 'package:article/article.dart';
@@ -48,9 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
     "Latar Belakang\n\n Pandemi Covid-19 telah membawa banyak perubahan dalam kehidupan manusia. Hampir seluruh kegiatan yang awalnya dilakukan secara offline sekarang dilakukan secara online. Beberapa di antaranya adalah kegiatan belajar mengajar, transaksi jual beli, dan konsultasi kesehatan. Untuk itu, CovidConsult hadir sebagai salah satu jalan untuk memungkinkan terjadinya konsultasi kesehatan secara online. CovidConsult memungkinkan setiap orang mendapatkan konsultasi kesehatan dimanapun dan kapanpun bersama tenaga kesehatan yang dapat dipilih sendiri. CovidConsult juga akan menyediakan data terkait pandemi Covid-19. Dilengkapi dengan forum diskusi yang dapat digunakan pengguna untuk bertanya dan bertukar informasi mengenai berbagai yang berkaitan dengan kesehatan. Untuk memastikan forum ini berjalan sesuai dengan tujuan awalnya akan ada moderator yang mengawasi forum yang telah dibuat. Selain itu, terdapat halaman informasi obat yang memungkinkan pengguna mencari tahu informasi mengenai obat yang sedang dikonsumsi ataupun yang akan dibeli.",
   ];
 
-  bool _isPlaying = false;
+  // bool _isPlaying = false;
 
-  CarouselSliderController _sliderController = CarouselSliderController();
+  final CarouselSliderController _sliderController = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -64,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: ListView(
           children: <Widget>[
+            // ignore: sized_box_for_whitespace
             Container(
               height: 400,
               child: CarouselSlider.builder(
@@ -75,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: colors[index],
                     child: Text(
                       letters[index],
-                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      style: const TextStyle(fontSize: 14, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                   );

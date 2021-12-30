@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_const_constructors_in_immutables, prefer_const_constructors, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, prefer_is_empty, non_constant_identifier_names, unused_field, duplicate_ignore
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -130,7 +132,7 @@ class _MainForumState extends State<MainForum> {
           FutureBuilder<List>(
             future: PostService.getForumCategory(request, currentCategory),
             builder: (context, snapshot) {
-              if(snapshot.data?.length==0){
+              if (snapshot.data?.length == 0) {
                 return const Center(
                   child: Text("0 Forum"),
                 );
@@ -211,31 +213,30 @@ class _MainForumState extends State<MainForum> {
               return CircularProgressIndicator();
             },
           ),
-
         ],
       ),
       floatingActionButton: BouncingWidget(
-              scaleFactor: 1.5,
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => AddForum()));
-              },
-              child: Container(
-                width: 55,
-                height: 55,
-                decoration: const BoxDecoration(
-                  color: Color(0xff6B46C1), // border color
-                  shape: BoxShape.circle,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-              ),
+        scaleFactor: 1.5,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddForum()));
+        },
+        child: Container(
+          width: 55,
+          height: 55,
+          decoration: const BoxDecoration(
+            color: Color(0xff6B46C1), // border color
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30,
             ),
+          ),
+        ),
+      ),
       //   onPressed: () {
       //     Navigator.push(
       //         context, MaterialPageRoute(builder: (_) => AddForum()));
@@ -262,23 +263,34 @@ class CategoryIcon extends StatelessWidget {
           onPressed: () {
             if (iconText == 'All Category') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'All Category')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'All Category')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'General Discussion') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'General Discussion')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum',
+                          currentCategory: 'General Discussion')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'Drug Info') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Drug Info')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'Drug Info')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'Covid Info') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'Covid Info')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'Covid Info')),
                   (Route<dynamic> route) => false);
             } else if (iconText == 'My Discussion') {
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum', currentCategory: 'My Discussion')),
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum', currentCategory: 'My Discussion')),
                   (Route<dynamic> route) => false);
             }
           },
@@ -432,19 +444,18 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-class Debouncer{
+class Debouncer {
   int milliseconds;
   VoidCallback? action;
   Timer? _timer;
- 
+
   Debouncer({required this.milliseconds});
- 
+
   run(VoidCallback action) {
     if (null != _timer) {
       _timer!.cancel();
     }
 
     _timer = Timer(Duration(milliseconds: milliseconds), action);
-
   }
 }
