@@ -237,13 +237,6 @@ class _MainForumState extends State<MainForum> {
           ),
         ),
       ),
-      //   onPressed: () {
-      //     Navigator.push(
-      //         context, MaterialPageRoute(builder: (_) => AddForum()));
-      //   },
-      //   backgroundColor: const Color(0xff6B46C1),
-      //   child: const Icon(Icons.add, color: Colors.white),
-      // ),
     );
   }
 }
@@ -311,6 +304,7 @@ class SearchPage extends StatefulWidget {
 // Search Page
 class _SearchPageState extends State<SearchPage> {
   List<dynamic> searchResults = [];
+  bool _load = false;
   searchDjango(value) async {
     SearchService.searchForum(value).then((responseBody) {
       List<dynamic> data = jsonDecode(responseBody);
@@ -320,15 +314,45 @@ class _SearchPageState extends State<SearchPage> {
           searchResults.add(value);
         }
       });
-
-      // print(data.runtimeType.toString());
-      // print(searchResults.runtimeType.toString());
     });
   }
 
   var nameHolder = TextEditingController();
   clearTextInput() {
     nameHolder.clear();
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        Widget loadingIndicator = _load
+            ? AlertDialog(
+                title: Text("Searching..."),
+                content: Container(
+                  height: 100,
+                  child: Column(
+                    children: const <Widget>[
+                      CircularProgressIndicator(),
+                      Text("Please wait...")
+                    ],
+                  ),
+                ),
+              )
+            : Container();
+        return Align(
+          child: loadingIndicator,
+          alignment: FractionalOffset.center,
+        );
+      },
+    );
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _load = false;
+      });
+      Navigator.pop(context); //pop dialog
+    });
   }
 
   @override
@@ -346,9 +370,13 @@ class _SearchPageState extends State<SearchPage> {
           child: TextField(
             controller: nameHolder,
             onChanged: (value) {
-              searchResults.clear();
               debouncer.run(() {
-                searchDjango(value);
+                setState(() {
+                  searchResults = [];
+                  _load = true;
+                  _onLoading();
+                  searchDjango(value);
+                });
               });
             },
             style: const TextStyle(color: Colors.black),
@@ -364,7 +392,15 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       )),
-      body: ListView(
+      body: searchResults.isEmpty
+          ? const Center(
+              child: Text(
+                'No Result',
+                style: TextStyle(fontSize: 20),
+              ),
+            )
+          : 
+      ListView(
         children: <Widget>[
           const SizedBox(
             height: 10.0,
@@ -451,7 +487,7 @@ class Debouncer {
 
   Debouncer({required this.milliseconds});
 
-  run(VoidCallback action) {
+  void run(VoidCallback action) {
     if (null != _timer) {
       _timer!.cancel();
     }
