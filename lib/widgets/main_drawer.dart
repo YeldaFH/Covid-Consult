@@ -1,3 +1,4 @@
+import 'package:covid_consult/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:forum/forum.dart';
 import 'package:obatpedia/obatpedia.dart';
@@ -51,7 +52,7 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainPage(title: 'HomePage')));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MyHomePage(title: 'HomePage')));
           }),          
           buildListTile('Consultation', Icons.receipt_rounded, () {
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainConsultation(title: 'Consultation')));
@@ -62,9 +63,9 @@ class MainDrawer extends StatelessWidget {
           buildListTile('Obatpedia', Icons.medication, () {
             Navigator.push(context,MaterialPageRoute(builder: (context) => const MainObatpedia(title: 'Obatpedia')));
           }),
-          // buildListTile('Admin', Icons.login, () {
-          //   Navigator.pop(context);
-          // }),
+          buildListTile('Article', Icons.article, () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => const MainArticle(title: 'Article')));
+          }),
           buildListTile('Profile', Icons.supervised_user_circle, () {
             Navigator.push(context,MaterialPageRoute(builder: (context) => const MainProfile(title: 'Obatpedia')));
           }),
