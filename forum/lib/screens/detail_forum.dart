@@ -285,7 +285,11 @@ class DetailForumState extends State<DetailForum> {
                       MaterialPageRoute(
                           builder: (_) => AddReply(komen, dataForum)));
                 },
-                child: const Text('Reply')),
+                child: Text('Reply',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: HexColor('#a057b3')))),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:forum/models/model.dart';
 import 'package:forum/screens/add_forum.dart';
 import 'package:forum/screens/detail_forum.dart';
 import 'package:forum/screens/detail_forum_search.dart';
@@ -453,18 +454,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-}
-
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
 class Debouncer {
