@@ -2,6 +2,11 @@
 import 'package:konsultasi/konsultasi.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:covid_consult/common/network_service.dart';
+import 'package:konsultasi/models/model.dart';
+import 'package:provider/provider.dart';
+import 'package:konsultasi/api/api.dart';
+import 'dart:convert' as convert;
 
 class ConsultationForm extends StatefulWidget {
   final String title;
@@ -26,6 +31,7 @@ class Add_Consultation extends State<ConsultationForm> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Scaffold(
       drawer: const MainDrawer(),
       appBar: AppBar(
@@ -52,7 +58,33 @@ class Add_Consultation extends State<ConsultationForm> {
             ),
             margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
           ),
-          Container(),
+          Container(
+            // child: FutureBuilder<List<Profile>>(
+            //   future: GetProfile().getProfile(),
+            //   builder: (context, snapshot) {
+            //     return DropdownButton<String>(
+            //       value: 'Nama Dokter',
+            //       icon: const Icon(Icons.arrow_downward),
+            //       elevation: 16,
+            //       underline: Container(
+            //         height: 2,
+            //         color: Colors.deepPurpleAccent,
+            //       ),
+            //       onChanged: (String? value) {
+            //         setState(() {
+            //           namaDokter = value!;
+            //         });
+            //       },
+            //       items: snapshot.data!.map<DropdownMenuItem<String>>((d) =>
+            //         DropdownMenuItem<String>(
+            //           child: Text(d.name),
+            //           value: d.name,
+            //         )
+            //       ).toList()
+            //     );
+            //   }
+            // ),
+          ),
           Container(
             child: Text(
               'Nama Pasien',
@@ -221,11 +253,41 @@ class Add_Consultation extends State<ConsultationForm> {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MainConsultation(title: 'Consultation Form')));
+              onPressed: () async {
+                if (_formKey.currentState?.validate() ?? true) {
+                  final response = await request.postJson(
+                    'https://covid-consult-herokuapp.com/consultation/flutter-consultation-form',
+                    convert.jsonEncode(<String, String>{
+                      'nama_dokter': namaDokter,
+                      'nama_pasien': namaPasien,
+                      'waktu_konsultasi': waktuKonsultasi,
+                      'nomor_handphone': nomorHandphone,
+                      'hari_konsultasi': hariKonsultasi,
+                      'email': email
+                    })
+                  );
+                  if (response['status'] == 'success') {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(
+                      content: Text("Successfully created forum!"),
+                    ));
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) => MainConsultation(
+                            title: 'Consultation')
+                        )
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(
+                      content:
+                      Text("An error occured, please try again."),
+                    ));
+                  }
+                }
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const MainConsultation(title: 'Consultation Form')));
               },
               child: Text(
                 'Submit',

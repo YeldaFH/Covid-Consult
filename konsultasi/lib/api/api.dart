@@ -5,6 +5,7 @@ import 'package:forum/models/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:covid_consult/common/network_service.dart';
 import 'package:konsultasi/models/model.dart';
+import 'dart:developer' as developer;
 
 class GetProfile {
   Future<List<Profile>> getProfile() async {
@@ -30,6 +31,7 @@ class GetConsultationPatient {
     List<Consultation> consultation = [];
     for (var d in data) {
       if (d != null) {
+        developer.log(d);
         consultation.add(Consultation.fromJson(d));
       }
     }

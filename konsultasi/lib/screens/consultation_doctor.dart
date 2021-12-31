@@ -45,7 +45,24 @@ class _ConsultationDoctorState extends State<ConsultationDoctor> {
             margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
           ),
           Container(
-
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: const <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
           Container(
             child: Text(
@@ -56,7 +73,24 @@ class _ConsultationDoctorState extends State<ConsultationDoctor> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: const <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
           Container(
             child: Text(
@@ -67,7 +101,24 @@ class _ConsultationDoctorState extends State<ConsultationDoctor> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: const <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
           Container(
             child: Text(
@@ -78,7 +129,24 @@ class _ConsultationDoctorState extends State<ConsultationDoctor> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: const <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
           Container(
             child: Text(
@@ -87,6 +155,26 @@ class _ConsultationDoctorState extends State<ConsultationDoctor> {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+          ),
+          Container(
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: const <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
         ],
       ),
