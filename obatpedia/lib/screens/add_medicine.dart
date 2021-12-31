@@ -20,7 +20,7 @@ class AddMedicine extends State<MedicineForm> {
   // late XFile? image;
   // late String base64Image;
   // late File tmpFile;
-  late String base64image = "test";
+  late String base64image = "no image";
   String name = "";
   String description = "";
   String composition = "";
@@ -47,18 +47,18 @@ class AddMedicine extends State<MedicineForm> {
                     ),
                     margin: EdgeInsets.fromLTRB(0, 25, 0, 20),
                   ),
-                  // Container(
-                  //   child: TextButton(
-                  //     onPressed: () async {
-                  //       var pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-                  //       base
-                  //     },
-                  //     child: const Text(
-                  //       'Add Image',
-                  //       style: TextStyle(color: Colors.white, fontSize: 25),
-                  //     ),
-                  //   )
-                  // ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () async {
+                        var pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                        base64image = convert.base64Encode(await pickedImage!.readAsBytes());
+                      },
+                      child: const Text(
+                        'Add Image',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    )
+                  ),
                   Container(
                     child: Text(
                       'Medicine Name',
