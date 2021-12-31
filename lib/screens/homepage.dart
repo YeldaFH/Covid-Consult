@@ -11,6 +11,7 @@ import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
 import 'package:forum/forum.dart';
+import 'package:konsultasi/konsultasi.dart';
 import 'package:obatpedia/obatpedia.dart';
 
 void main() {
@@ -424,15 +425,11 @@ class ModulIcon extends StatelessWidget {
           ),
           onPressed: () {
             if (iconText == 'Article') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
             } else if (iconText == 'Forum') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum',currentCategory: 'General Discussion')));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainForum(title: 'Forum',currentCategory: 'General Discussion')));
             } else if (iconText == 'Consultation') {
-              Navigator.pop(context);
-              // Ubah ke Konsultasi
-              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainConsultation(title: 'Consultation')));
             } else if (iconText == 'ObatPedia') {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainObatpedia(title: 'ObatPedia')));
             }
