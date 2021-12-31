@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:article/article.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 // import 'package:covid_consult/common/network_service.dart';
 // import 'package:article/article.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:forum/forum.dart';
+import 'package:obatpedia/obatpedia.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +53,42 @@ class _MyHomePageState extends State<MyHomePage> {
     "Latar Belakang\n\n Pandemi Covid-19 telah membawa banyak perubahan dalam kehidupan manusia. Hampir seluruh kegiatan yang awalnya dilakukan secara offline sekarang dilakukan secara online. Beberapa di antaranya adalah kegiatan belajar mengajar, transaksi jual beli, dan konsultasi kesehatan. Untuk itu, CovidConsult hadir sebagai salah satu jalan untuk memungkinkan terjadinya konsultasi kesehatan secara online. CovidConsult memungkinkan setiap orang mendapatkan konsultasi kesehatan dimanapun dan kapanpun bersama tenaga kesehatan yang dapat dipilih sendiri. CovidConsult juga akan menyediakan data terkait pandemi Covid-19. Dilengkapi dengan forum diskusi yang dapat digunakan pengguna untuk bertanya dan bertukar informasi mengenai berbagai yang berkaitan dengan kesehatan. Untuk memastikan forum ini berjalan sesuai dengan tujuan awalnya akan ada moderator yang mengawasi forum yang telah dibuat. Selain itu, terdapat halaman informasi obat yang memungkinkan pengguna mencari tahu informasi mengenai obat yang sedang dikonsumsi ataupun yang akan dibeli.",
   ];
 
-  // bool _isPlaying = false;
+  var modulAtas = Container(
+    padding: const EdgeInsets.all(5.0),
+    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30.0),
+        topRight: Radius.circular(30.0),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const <Widget>[
+        ModulIcon(Icons.article, "Article"),
+        ModulIcon(Icons.forum, "Forum"),
+      ],
+    ),
+  );
+  var modulBawah = Container(
+    padding: const EdgeInsets.all(5.0),
+    margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(30.0),
+        bottomRight: Radius.circular(30.0),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const <Widget>[
+        ModulIcon(Icons.health_and_safety, "Consultation"),
+        ModulIcon(Icons.medical_services, "ObatPedia"),
+      ],
+    ),
+  );
 
   final CarouselSliderController _sliderController = CarouselSliderController();
 
@@ -68,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             // ignore: sized_box_for_whitespace
             Container(
-              height: 400,
+              height: 300,
               child: CarouselSlider.builder(
                 unlimitedMode: true,
                 controller: _sliderController,
@@ -78,14 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: colors[index],
                     child: Text(
                       letters[index],
-                      style: const TextStyle(fontSize: 14, color: Colors.white),
+                      style: const TextStyle(fontSize: 13, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                   );
                 },
                 slideTransform: CubeTransform(),
                 slideIndicator: CircularSlideIndicator(
-                  padding: EdgeInsets.only(bottom: 32),
+                  padding: EdgeInsets.only(bottom: 15),
                   indicatorBorderColor: Colors.purple,
                 ),
                 itemCount: colors.length,
@@ -93,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 21),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Align(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minWidth: 240, maxWidth: 600),
@@ -109,101 +147,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            ),
+            modulAtas,
+            modulBawah,
+            Container(
+              child: const Text(
+                'Our Team',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              ),
               margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-              height: 150.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      width: 150.0,
-                      child: ListView(children: [
-                        const Text(
-                          "Article",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.article),
-                          iconSize: 80,
-                          tooltip: 'Article',
-                          onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
-                          },
-                        ),
-                      ])),
-                  Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      width: 150.0,
-                      child: ListView(children: [
-                        const Text(
-                          "Forum",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.forum),
-                          iconSize: 80,
-                          tooltip: 'Forum',
-                          onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
-                          },
-                        ),
-                      ])),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-              height: 150.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      width: 150.0,
-                      child: ListView(children: [
-                        const Text(
-                          "Consultation",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.health_and_safety),
-                          iconSize: 80,
-                          tooltip: 'Konsultasi',
-                          onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
-                          },
-                        ),
-                      ])),
-                  Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 10),
-                      width: 150.0,
-                      child: ListView(children: [
-                        const Text(
-                          "ObatPedia",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.medical_services),
-                          iconSize: 80,
-                          tooltip: 'ObatPedia',
-                          onPressed: () {
-                            // Navigator.push(context,MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
-                          },
-                        ),
-                      ])),
-                ],
-              ),
+            SizedBox(
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.all(3),
@@ -242,8 +199,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const SizedBox(
+            
+            SizedBox(
               height: 30,
+            
             ),
           ],
         ),
@@ -269,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Divider(
-                      height: 15,
+                      height: 10,
                       thickness: 5,
                       indent: 230,
                       endIndent: 230,
@@ -442,6 +401,58 @@ class _MyHomePageState extends State<MyHomePage> {
           textColor: Colors.white,
           child: const Text('Close'),
         ),
+      ],
+    );
+  }
+}
+
+class ModulIcon extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
+  const ModulIcon(this.icon, this.iconText);
+
+  final String iconText;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        IconButton(
+          icon: Icon(
+            icon,
+            size: 40,
+          ),
+          onPressed: () {
+            if (iconText == 'Article') {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (_) => MainArticle(
+                            title: 'Article',
+                          )),
+                  (Route<dynamic> route) => false);
+            } else if (iconText == 'Forum') {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (_) => MainForum(
+                          title: 'Forum',
+                          currentCategory: 'General Discussion')),
+                  (Route<dynamic> route) => false);
+            } else if (iconText == 'Consultation') {
+              Navigator.pop(context);
+              // Ubah ke Konsultasi
+              // Navigator.of(context).pushAndRemoveUntil(
+              //     MaterialPageRoute(
+              //         builder: (_) => MainArticle(title: 'Article',)),  
+              //     (Route<dynamic> route) => false);
+            } else if (iconText == 'ObatPedia') {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (_) => MainObatpedia(title: 'ObatPedia')),
+                  (Route<dynamic> route) => false);
+            }
+          },
+        ),
+        Text(iconText, style: TextStyle(fontSize: 20),textAlign: TextAlign.center,),
       ],
     );
   }
