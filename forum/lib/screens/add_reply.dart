@@ -132,11 +132,8 @@ class AddReplyState extends State<AddReply> {
                                   .showSnackBar(const SnackBar(
                                 content: Text("Successfully created reply!"),
                               ));
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => DetailForum(dataForum)));
+                              Navigator.pushReplacement(context, MaterialPageRoute(
+                                  builder: (context) => DetailForum(dataForum)));
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(

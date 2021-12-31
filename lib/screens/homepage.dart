@@ -257,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -280,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -303,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -334,7 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -357,7 +357,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -380,7 +380,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           "Backend",
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -424,31 +424,17 @@ class ModulIcon extends StatelessWidget {
           ),
           onPressed: () {
             if (iconText == 'Article') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainArticle(
-                            title: 'Article',
-                          )),
-                  (Route<dynamic> route) => false);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
             } else if (iconText == 'Forum') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum',
-                          currentCategory: 'General Discussion')),
-                  (Route<dynamic> route) => false);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => MainForum(title: 'Forum',currentCategory: 'General Discussion')));
             } else if (iconText == 'Consultation') {
               Navigator.pop(context);
               // Ubah ke Konsultasi
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(
-              //         builder: (_) => MainArticle(title: 'Article',)),  
-              //     (Route<dynamic> route) => false);
+              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainArticle(title: 'Article',)));
             } else if (iconText == 'ObatPedia') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainObatpedia(title: 'ObatPedia')),
-                  (Route<dynamic> route) => false);
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => MainObatpedia(title: 'ObatPedia')));
             }
           },
         ),

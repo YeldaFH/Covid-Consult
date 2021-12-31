@@ -170,11 +170,8 @@ class Add_Forum extends State<AddForum> {
                                 .showSnackBar(const SnackBar(
                               content: Text("Successfully created forum!"),
                             ));
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => MainForum(
+                            Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (context) => MainForum(
                                         title: 'Forum',
                                         currentCategory: 'All Category')));
                           } else {

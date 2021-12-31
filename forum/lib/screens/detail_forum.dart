@@ -147,11 +147,8 @@ class DetailForumState extends State<DetailForum> {
                               setState(() {
                                 _comment = "";
                               });
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => DetailForum(dataForum)));
+                              Navigator.pushReplacement(context, MaterialPageRoute(
+                                  builder: (context) => DetailForum(dataForum)));
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(

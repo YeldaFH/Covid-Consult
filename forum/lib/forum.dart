@@ -254,36 +254,25 @@ class CategoryIcon extends StatelessWidget {
           icon: Icon(icon),
           onPressed: () {
             if (iconText == 'All Category') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'All Category')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'All Category')));
             } else if (iconText == 'General Discussion') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum',
-                          currentCategory: 'General Discussion')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'General Discussion')));
             } else if (iconText == 'Drug Info') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'Drug Info')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'Drug Info')));
             } else if (iconText == 'Covid Info') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'Covid Info')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'Covid Info')));
             } else if (iconText == 'My Discussion') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'My Discussion')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'My Discussion')));
             }
           },
         ),
