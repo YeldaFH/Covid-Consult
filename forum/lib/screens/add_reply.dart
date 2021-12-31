@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, no_logic_in_create_state
-
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:forum/screens/detail_forum.dart';
@@ -120,7 +119,7 @@ class AddReplyState extends State<AddReply> {
                             var data = komen.id;
                             // print(data);
                             String url =
-                                "http://covid-consult.herokuapp.com/forum/replyCommentNewForum/$data/";
+                                "https://covid-consult.herokuapp.com/forum/replyCommentNewForum/$data/";
                             // print(url);
                             final response = await request.postJson(
                               url,

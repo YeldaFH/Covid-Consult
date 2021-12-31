@@ -509,7 +509,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (_formKey.currentState!.validate()) {
                           // Submit to Django server and wait for response
                           final response = await request.postJson(
-                              "http://127.0.0.1:8000/accounts/signupFlutter",
+                              "https://covid-consult.herokuapp.com/accounts/signupFlutter",
                               convert.jsonEncode(<String, String>{
                                 'username': username,
                                 'password': password1,

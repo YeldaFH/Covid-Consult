@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:forum/models/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:covid_consult/common/network_service.dart';
-// import 'package:provider/provider.dart';
 
 class PostForum {
   Future<List<Post>> getForumCategory(
@@ -19,7 +18,7 @@ class PostForum {
     } else {
       // category = 'user';
 
-      String url = "http://covid-consult.herokuapp.com/forum/api/user/";
+      String url = "https://covid-consult.herokuapp.com/forum/api/user/";
       final response = await request.get(url);
       List<Post> post = [];
       for (var d in response) {
@@ -30,7 +29,7 @@ class PostForum {
       return post;
     }
 
-    String url = "http://covid-consult.herokuapp.com/forum/api/$category/";
+    String url = "https://covid-consult.herokuapp.com/forum/api/$category/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Post> post = [];
@@ -42,7 +41,7 @@ class PostForum {
     return post;
   }
 
-  String baseUrl = "http://covid-consult.herokuapp.com/apis/forum/?format=json";
+  String baseUrl = "https://covid-consult.herokuapp.com/apis/forum/?format=json";
   Future<List> getAllForum() async {
     try {
       var response = await http.get(Uri.parse(baseUrl));
@@ -58,22 +57,11 @@ class PostForum {
       return Future.error(e);
     }
   }
-
-  // Future<dynamic> addNewForum(Post forum) async {
-  //   var url = Uri.parse('http://127.0.0.1/8000/forum/postNewForum/');
-  //   var response = await http.post(url,
-  //       headers: {
-  //         "Access-Control_Allow_Origin": "*",
-  //         "Content-Type": "application/json; charset=utf-8",
-  //       },
-  //       body: jsonEncode(forum));
-  //   return jsonDecode(response.body)["success"];
-  // }
 }
 
 class SearchService {
   static Future<String> searchForum(String query) async {
-    String url = 'http://covid-consult.herokuapp.com/apis/forum/?search=$query';
+    String url = 'https://covid-consult.herokuapp.com/apis/forum/?search=$query';
     http.Response response = await http.get(Uri.parse(url));
     // print("search_service.dart: searchDjangoApi: ${response.body}");
     return response.body;
@@ -84,7 +72,7 @@ class CommentForumService {
   Future<List<Comment>> getComment(int dataForum) async {
     // print(dataForum);
     String url =
-        "http://covid-consult.herokuapp.com/forum/commentForum/$dataForum/";
+        "https://covid-consult.herokuapp.com/forum/commentForum/$dataForum/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Comment> comment = [];
@@ -101,7 +89,7 @@ class ReplyCommentForumService {
   Future<List<Reply>> getReply(int dataForum) async {
     // print(dataForum);
     String url =
-        "http://covid-consult.herokuapp.com/forum/replyCommentForum/$dataForum/";
+        "https://covid-consult.herokuapp.com/forum/replyCommentForum/$dataForum/";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Reply> reply = [];

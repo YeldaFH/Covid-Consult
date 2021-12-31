@@ -7,7 +7,6 @@ import 'package:profil/profil.dart';
 import 'package:article/article.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/src/provider.dart';
 // import 'package:consultation/consultation.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -95,7 +94,7 @@ class MainDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        const MainProfile(title: 'Obatpedia')));
+                        const MainProfile(title: 'Profile')));
           }),
           buildListTile('Logout', Icons.login, () async {
             final response = await request
