@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:image/image.dart' as Img;
 
 class MedicineForm extends StatefulWidget {
   const MedicineForm({Key? key}) : super(key: key);
@@ -19,21 +20,13 @@ class AddMedicine extends State<MedicineForm> {
   // late XFile? image;
   // late String base64Image;
   // late File tmpFile;
+  late String base64image = "test";
   String name = "";
   String description = "";
   String composition = "";
   String dosage_and_instructions = "";
   String side_effects = "";
-
-  // chooseImage() {
-  //   setState(() async {
-  //     image = await image_picker.pickImage(source: ImageSource.gallery);
-  //     base64Image = convert.base64Encode(image!.readAsBytes());
-  //   });
-  // }
-
-
-
+  @override
   Widget build(BuildContext context){
     final request = context.watch<NetworkService>();
     return Scaffold(
@@ -44,10 +37,7 @@ class AddMedicine extends State<MedicineForm> {
         ),
         body: Form(
             key: _formKey,
-            child:
-            ListView(
-                padding: EdgeInsets.all(16),
-                children: [
+            child: ListView(padding: EdgeInsets.all(16), children: [
                   Container(
                     child:
                     Text('Add New Medicine',textAlign: TextAlign.center,
@@ -59,8 +49,9 @@ class AddMedicine extends State<MedicineForm> {
                   ),
                   // Container(
                   //   child: TextButton(
-                  //     onPressed: () {
-                  //       chooseImage();
+                  //     onPressed: () async {
+                  //       var pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                  //       base
                   //     },
                   //     child: const Text(
                   //       'Add Image',
@@ -69,11 +60,9 @@ class AddMedicine extends State<MedicineForm> {
                   //   )
                   // ),
                   Container(
-                    child:
-                    Text('Medicine Name',
-                      style:
-                      TextStyle(fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                    child: Text(
+                      'Medicine Name',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
                   ),
@@ -106,13 +95,11 @@ class AddMedicine extends State<MedicineForm> {
                     margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   ),
                   Container(
-                    child:
-                    Text('Description',
-                      style:
-                      TextStyle(fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                    child: Text(
+                      'Description',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
                   ),
                   Container(
                     child: TextFormField(
@@ -121,8 +108,6 @@ class AddMedicine extends State<MedicineForm> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           labelText: 'Description'),
-                      minLines: 14,
-                      maxLines: null,
                       onSaved: (String? value) {
                         // This optional block of code can be used to run
                         // code when the user saves the form.
@@ -137,21 +122,19 @@ class AddMedicine extends State<MedicineForm> {
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'Description tidak boleh kosong';
+                          return 'nama tidak boleh kosong';
                         }
                         return null;
                       },
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   ),
                   Container(
-                    child:
-                    Text('Composition',
-                      style:
-                      TextStyle(fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                    child: Text(
+                      'Composition',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
                   ),
                   Container(
                     child: TextFormField(
@@ -160,8 +143,6 @@ class AddMedicine extends State<MedicineForm> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           labelText: 'Composition'),
-                      minLines: 14,
-                      maxLines: null,
                       onSaved: (String? value) {
                         // This optional block of code can be used to run
                         // code when the user saves the form.
@@ -176,60 +157,19 @@ class AddMedicine extends State<MedicineForm> {
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'konten tidak boleh kosong';
+                          return 'nama tidak boleh kosong';
                         }
                         return null;
                       },
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   ),
                   Container(
-                    child:
-                    Text('Side Effects',
-                      style:
-                      TextStyle(fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                    child: Text(
+                      'Dosage and Instructions:',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                  ),
-                  Container(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          labelText: 'Side Effects'),
-                      minLines: 14,
-                      maxLines: null,
-                      onSaved: (String? value) {
-                        // This optional block of code can be used to run
-                        // code when the user saves the form.
-                        setState(() {
-                          side_effects = value!;
-                        });
-                      },
-                      onChanged: (String? value) {
-                        setState(() {
-                          side_effects = value!;
-                        });
-                      },
-                      validator: (value) {
-                        if (value?.isEmpty ?? true) {
-                          return 'konten tidak boleh kosong';
-                        }
-                        return null;
-                      },
-                    ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                  ),
-                  Container(
-                    child:
-                    Text('Dosage and Instructions',
-                      style:
-                      TextStyle(fontSize: 22,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
                   ),
                   Container(
                     child: TextFormField(
@@ -238,8 +178,6 @@ class AddMedicine extends State<MedicineForm> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           labelText: 'Dosage and Instructions'),
-                      minLines: 14,
-                      maxLines: null,
                       onSaved: (String? value) {
                         // This optional block of code can be used to run
                         // code when the user saves the form.
@@ -254,12 +192,47 @@ class AddMedicine extends State<MedicineForm> {
                       },
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'konten tidak boleh kosong';
+                          return 'nama tidak boleh kosong';
                         }
                         return null;
                       },
                     ),
-                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  ),
+                  Container(
+                    child: Text(
+                      'Side Effects:',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
+                  ),
+                  Container(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          labelText: 'Side Effects'),
+                      onSaved: (String? value) {
+                        // This optional block of code can be used to run
+                        // code when the user saves the form.
+                        setState(() {
+                          side_effects = value!;
+                        });
+                      },
+                      onChanged: (String? value) {
+                        setState(() {
+                          side_effects = value!;
+                        });
+                      },
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'nama tidak boleh kosong';
+                        }
+                        return null;
+                      },
+                    ),
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   ),
                   Container(
                     padding: EdgeInsets.all(15),
@@ -268,14 +241,14 @@ class AddMedicine extends State<MedicineForm> {
                     child: TextButton( onPressed: () async {
                       if (_formKey.currentState?.validate() ?? true) {
                         final response = await request.post(
-                            "http://127.0.0.1:8000/obatpedia/addMedicineFlutter",
+                            "https://covid-consult.herokuapp.com/obatpedia/addMedicineFlutter",
                             convert.jsonEncode(<String, String>{
-                              // 'base64image' : base64Image,
+                              'base64image' : base64image,
                               'name': name,
                               'description' : description,
                               'composition': composition,
                               'dosage_instructions' : dosage_and_instructions,
-                              'side_effects' : side_effects
+                              'side_effects' : side_effects,
                             }));
                         if (response['status'] == 'success') {
                           Navigator.push(

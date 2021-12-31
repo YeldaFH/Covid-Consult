@@ -17,7 +17,7 @@ class medicineDetails extends StatelessWidget {
             padding: EdgeInsets.all(16),
             children: [
               Image(
-                image: NetworkImage('http://127.0.0.1:8000/media/' + model.image,
+                image: NetworkImage('https://covid-consult.herokuapp.com/media/' + model.image,
                 ),
               ),
               Container(

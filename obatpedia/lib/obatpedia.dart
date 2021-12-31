@@ -81,7 +81,7 @@ class _MainObatpediaState extends State<MainObatpedia> {
                         child: Column(
                             children: <Widget>[
                               Image(
-                                image: NetworkImage('http://127.0.0.1:8000/media/' + MedicineModel.image,
+                                image: NetworkImage('https://covid-consult.herokuapp.com/media/' + MedicineModel.image,
                                 ),
                                 height: 200,
                               ),
@@ -142,7 +142,7 @@ class _MainObatpediaState extends State<MainObatpedia> {
                               child: Column(
                                   children: <Widget>[
                                     Image(
-                                      image: NetworkImage('http://127.0.0.1:8000/media/' + dataMedicine.image,
+                                      image: NetworkImage('https://covid-consult.herokuapp.com/media/' + dataMedicine.image,
                                       ),
                                       height: 200,
                                     ),
@@ -170,7 +170,7 @@ class _MainObatpediaState extends State<MainObatpedia> {
 
   Future<List<MedicineModel>> getMedicine() async {
     final request = context.watch<NetworkService>();
-    String url = 'http://127.0.0.1:8000/obatpedia/http_response';
+    String url = 'https://covid-consult.herokuapp.com/obatpedia/http_response';
 
     final response = await request.get(url);
 
