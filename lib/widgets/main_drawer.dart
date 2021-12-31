@@ -72,7 +72,6 @@ class MainDrawer extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => const MainConsultation(title: 'Consultation')));
-            // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainConsultation(title: 'Consultation')));
           }),
           buildListTile('Forum', Icons.forum, () {
             Navigator.push(

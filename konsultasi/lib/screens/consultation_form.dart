@@ -1,10 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers, unused_local_variable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, no_logic_in_create_state, unnecessary_brace_in_string_interps, avoid_unnecessary_containers
 
 import 'package:covid_consult/common/network_service.dart';
 import 'package:konsultasi/konsultasi.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:konsultasi/api/api.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
 
 class ConsultationForm extends StatefulWidget {
