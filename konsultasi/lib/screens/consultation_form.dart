@@ -3,9 +3,7 @@ import 'package:konsultasi/konsultasi.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
 import 'package:covid_consult/common/network_service.dart';
-import 'package:konsultasi/models/model.dart';
 import 'package:provider/provider.dart';
-import 'package:konsultasi/api/api.dart';
 import 'dart:convert' as convert;
 
 class ConsultationForm extends StatefulWidget {
