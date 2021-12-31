@@ -1,11 +1,11 @@
-import 'dart:html';
-
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, no_logic_in_create_state, camel_case_types
 import 'package:flutter/material.dart';
 import 'package:obatpedia/models/model.dart';
 
 class medicineDetails extends StatelessWidget {
   MedicineModel model;
   medicineDetails(this.model);
+  @override
   Widget build(BuildContext context){
     return Scaffold(
         backgroundColor: Color(0xff131313),

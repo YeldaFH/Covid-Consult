@@ -1,11 +1,10 @@
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, no_logic_in_create_state, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:obatpedia/obatpedia.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-import 'package:image/image.dart' as Img;
 
 class MedicineForm extends StatefulWidget {
   const MedicineForm({Key? key}) : super(key: key);
@@ -47,17 +46,15 @@ class AddMedicine extends State<MedicineForm> {
                     ),
                     margin: EdgeInsets.fromLTRB(0, 25, 0, 20),
                   ),
-                  Container(
-                    child: TextButton(
-                      onPressed: () async {
-                        var pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-                        base64image = convert.base64Encode(await pickedImage!.readAsBytes());
-                      },
-                      child: const Text(
-                        'Add Image',
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                    )
+                  TextButton(
+                    onPressed: () async {
+                      var pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                      base64image = convert.base64Encode(await pickedImage!.readAsBytes());
+                    },
+                    child: const Text(
+                      'Add Image',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
                   ),
                   Container(
                     child: Text(
