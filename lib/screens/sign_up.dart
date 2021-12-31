@@ -18,11 +18,18 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final snackBar = SnackBar(
-    content: const Text("Account has been successfully registered!"),
+    content: const Text("Account has been successfully registered!",
+        style: TextStyle(color: Colors.white)),
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.pink.shade500,
   );
-  bool isPasswordVisible = false;
+  final snackBar2 = SnackBar(
+    content: const Text("Account with this username already exists.",
+        style: TextStyle(color: Colors.white)),
+    behavior: SnackBarBehavior.floating,
+    backgroundColor: Colors.pink.shade500,
+  );
+  bool isPasswordVisible = true;
   void togglePasswordView() {
     setState(() {
       isPasswordVisible = !isPasswordVisible;
@@ -31,6 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController _dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+  DateTime now = DateTime.now();
 
   String username = "";
   String password1 = "";
@@ -58,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   margin: const EdgeInsets.only(top: 50.0),
                   child: const Center(
                     child: Text(
-                      "✨ Hello ✨ ",
+                      " Hello ",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -101,12 +109,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFF9F7AEA),
                       ),
                       border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
+                      // enabledBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // ),
                       focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                        borderSide: BorderSide(color: Color(0xFF9F7AEA)),
                       ),
                     ),
                     onChanged: (String? value) {
@@ -149,12 +156,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFF9F7AEA),
                       ),
                       border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
+                      // enabledBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // ),
                       focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                        borderSide: BorderSide(color: Color(0xFF9F7AEA)),
                       ),
                     ),
                     onChanged: (String? value) {
@@ -197,12 +203,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFF9F7AEA),
                       ),
                       border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
+                      // enabledBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // ),
                       focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                        borderSide: BorderSide(color: Color(0xFF9F7AEA)),
                       ),
                     ),
                     onChanged: (String? value) {
@@ -235,7 +240,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 25.0, vertical: 10.0),
                   child: TextFormField(
-                    obscureText: true,
+                    obscureText: isPasswordVisible,
                     style: TextStyle(color: Colors.grey.shade100),
                     cursorColor: Colors.grey.shade100,
                     decoration: InputDecoration(
@@ -246,17 +251,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       labelStyle: TextStyle(color: Colors.grey.shade300),
                       floatingLabelStyle:
                           const TextStyle(color: Color(0xFF9F7AEA)),
-                      icon: const Icon(
-                        Icons.lock,
-                        color: Color(0xFF9F7AEA),
-                      ),
+                      icon: const Icon(Icons.lock, color: Color(0xFF9F7AEA)),
+                      suffix: InkWell(
+                          onTap: togglePasswordView,
+                          child: Icon(
+                            isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: const Color(0xFF9F7AEA),
+                          )),
                       border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
+                      // enabledBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.white, width: 1.0),
+                      // ),
                       focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                        borderSide: BorderSide(color: Color(0xFF9F7AEA)),
                       ),
                     ),
                     onChanged: (String? value) {
@@ -299,12 +308,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: Color(0xFF9F7AEA),
                       ),
                       border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
+                      // enabledBorder: const OutlineInputBorder(
+                      //   borderSide: BorderSide(color: Colors.white),
+                      // ),
                       focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color(0xFF9F7AEA), width: 1.0),
+                        borderSide: BorderSide(color: Color(0xFF9F7AEA)),
                       ),
                     ),
                     onChanged: (String? value) {
@@ -357,23 +365,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: Color(0xFF9F7AEA),
                           ),
                           border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 1.0),
+                            borderSide: BorderSide(color: Colors.white),
                           ),
                           enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 1.0),
+                            borderSide: BorderSide(color: Colors.white),
                           ),
                           focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(
                                   // color: Color(0xFF9F7AEA), width: 1.0),
-                                  color: Colors.white,
-                                  width: 1.0)),
+                                  color: Colors.white)),
                         ),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (dob) {
-                          if (dob ==
-                              DateFormat('yyyy-MM-dd').format(DateTime.now())) {
+                          if (dob!.compareTo(DateFormat('yyyy-MM-dd')
+                                  .format(DateTime.now())
+                                  .toString()) >
+                              0) {
                             return 'Please enter valid date of birth';
                           }
                           return null;
@@ -531,10 +538,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           } else {
                             if (response['status'] == 'User Exists') {
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text(
-                                    "Account with this username already exists."),
-                              ));
+                                  .showSnackBar(snackBar2);
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
@@ -591,21 +595,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    int tahun = int.parse(DateFormat('yyyy').format(now));
+    int bulan = int.parse(DateFormat('MM').format(now));
+    int hari = int.parse(DateFormat('dd').format(now));
+
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime(1900, 1),
-        lastDate: DateTime(2022));
+        lastDate: DateTime(tahun, bulan, hari));
+
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         dob = DateFormat('yyyy-MM-dd').format(selectedDate);
         _dateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
       });
-    } else {
-      // ignore: avoid_print
-      print("tanggal invalid");
     }
   }
 }
