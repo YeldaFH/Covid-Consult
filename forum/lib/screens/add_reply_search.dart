@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:forum/models/model.dart';
 import 'dart:convert' as convert;
-import '../forum.dart';
 
 // ignore: camel_case_types
 class AddReplySearch extends StatefulWidget {
