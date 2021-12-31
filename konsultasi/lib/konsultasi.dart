@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:covid_consult/main.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
