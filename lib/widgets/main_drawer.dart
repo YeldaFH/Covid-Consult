@@ -5,6 +5,7 @@ import 'package:forum/forum.dart';
 import 'package:obatpedia/obatpedia.dart';
 import 'package:profil/profil.dart';
 import 'package:article/article.dart';
+import 'package:konsultasi/konsultasi.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
 // import 'package:consultation/consultation.dart';
@@ -67,6 +68,10 @@ class MainDrawer extends StatelessWidget {
                     builder: (context) => const MyHomePage(title: 'HomePage')));
           }),
           buildListTile('Consultation', Icons.receipt_rounded, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MainConsultation(title: 'Consultation')));
             // Navigator.push(context,MaterialPageRoute(builder: (context) => const MainConsultation(title: 'Consultation')));
           }),
           buildListTile('Forum', Icons.forum, () {

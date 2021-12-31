@@ -29,8 +29,6 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.dark,
           title: title,
           home: const SignInScreen(),
-          // home: MainForum(title: 'Title', currentCategory: 'All'),
-          // home: const MainArticle(title: 'Title'),
         ));
   }
 }

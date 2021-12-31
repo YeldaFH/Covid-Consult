@@ -1,11 +1,19 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers, unused_local_variable
 
 import 'package:covid_consult/common/network_service.dart';
-// import 'package:flutter/cupertino.dart';
+import 'package:konsultasi/konsultasi.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:konsultasi/api/api.dart';
+import 'package:covid_consult/widgets/main_drawer.dart';
 
 class ConsultationForm extends StatefulWidget {
+  final String title;
+
+  const ConsultationForm({
+    required this.title
+  });
+
   @override
   Add_Consultation createState() => Add_Consultation();
 }
@@ -24,10 +32,13 @@ class Add_Consultation extends State<ConsultationForm> {
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
     return Scaffold(
-      backgroundColor: Color(0xff131313),
+      drawer: const MainDrawer(),
       appBar: AppBar(
-        title: Text('Consultation'),
-        backgroundColor: Color(0xff131313),
+        backgroundColor: const Color(0xff131313),
+        title: Text(
+          widget.title,
+          textScaleFactor: 1.3,
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -154,27 +165,28 @@ class Add_Consultation extends State<ConsultationForm> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-              child: DropdownButton<String>(
-            value: hariKonsultasi,
-            icon: const Icon(Icons.arrow_downward),
-            elevation: 16,
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            onChanged: (String? value) {
-              setState(() {
-                hariKonsultasi = value!;
-              });
-            },
-            items: <String>['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          )),
+            child: DropdownButton<String> (
+              value: "Senin",
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  hariKonsultasi = value!;
+                });
+              },
+              items: <String>['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat']
+                  .map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+              }).toList(),
+            )
+          ),
           Container(
             child: Text(
               'Email',
@@ -184,30 +196,51 @@ class Add_Consultation extends State<ConsultationForm> {
           ),
           Container(
               child: TextFormField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Email'),
+                onSaved: (String? value) {
+                  // This optional block of code can be used to run
+                  // code when the user saves the form.
+                  setState(() {
+                    email = value!;
+                  });
+                },
+                onChanged: (String? value) {
+                  setState(() {
+                    email = value!;
+                  });
+                },
+                validator: (value) {
+                  if (value?.isEmpty ?? true) {
+                    return 'Email Tidak Boleh Kosong';
+                  }
+                  return null;
+                },
+              )
+          ),
+          Center(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MainConsultation(title: 'Consultation Form')));
+              },
+              child: Text(
+                'Submit',
+                style: TextStyle(
+                    color: Colors.white
                 ),
-                labelText: 'Email'),
-            onSaved: (String? value) {
-              // This optional block of code can be used to run
-              // code when the user saves the form.
-              setState(() {
-                email = value!;
-              });
-            },
-            onChanged: (String? value) {
-              setState(() {
-                email = value!;
-              });
-            },
-            validator: (value) {
-              if (value?.isEmpty ?? true) {
-                return 'Email Tidak Boleh Kosong';
-              }
-              return null;
-            },
-          ))
+              ),
+            ),
+          ),
+
         ]),
       ),
     );
