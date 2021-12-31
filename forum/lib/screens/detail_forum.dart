@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:forum/models/model.dart';
 import 'dart:convert' as convert;
-import '../forum.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 // ignore: camel_case_types

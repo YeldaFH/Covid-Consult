@@ -6,9 +6,7 @@ import 'package:forum/screens/detail_forum.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
-// import 'package:forum/models/model.dart';
 import 'dart:convert' as convert;
-import '../forum.dart';
 
 // ignore: camel_case_types
 class AddReply extends StatefulWidget {
