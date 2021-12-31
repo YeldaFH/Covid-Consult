@@ -64,7 +64,21 @@ class _ConsultationPatientState extends State<ConsultationPatient> {
             margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
           ),
           Container(
-
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: <Widget>[
+                Text(
+                  "Waktu",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "Dokter",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           ),
           Container(
             child: Text(

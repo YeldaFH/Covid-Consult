@@ -1,9 +1,11 @@
 import 'package:covid_consult/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:konsultasi/models/model.dart';
 import 'package:konsultasi/screens/consultation_patient.dart';
 import 'package:konsultasi/screens/consultation_form.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:konsultasi/api/api.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark, primarySwatch: Colors.purple),
     themeMode: ThemeMode.dark,
     title: title,
-    home: const ConsultationPatient(title: title,),
+    home: const ConsultationPatient(title: title),
   );
 }
 
@@ -35,6 +37,9 @@ class MainConsultation extends StatefulWidget {
 }
 
 class _MainConsultationState extends State<MainConsultation> {
+  GetProfile profile = GetProfile();
+  GetConsultationPatient consultationPatient = GetConsultationPatient();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +89,62 @@ class _MainConsultationState extends State<MainConsultation> {
             margin: EdgeInsets.fromLTRB(0, 25, 0, 10),
           ),
           Container(
-
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      textDirection: TextDirection.rtl,
+                      children: <Widget>[
+                        Text(
+                          "Waktu",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Dokter",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    FutureBuilder(
+                      future: GetConsultationPatient().getConsultationPatient(),
+                      // future: Future.wait([GetConsultationPatient().getConsultationPatient(),
+                      // GetProfile().getProfile()]),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text("-->>${snapshot.error}<<--");
+                        }
+                        else if (snapshot.hasData) {
+                          List<Consultation>? consultation = snapshot.data as List<Consultation>;
+                          return Row(
+                              children: [
+                                for (var data in consultation)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  textDirection: TextDirection.rtl,
+                                  children: <Widget>[
+                                    Text(
+                                      data.startKonsultasi + " - " + data.endKonsultasi,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      data.namaDokter,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                    )
+                                  ]
+                                )
+                            ]);
+                        }
+                        return CircularProgressIndicator();
+                      }
+                    )
+                  ]
+                )
+              )
           ),
           Container(
             child: Text(
@@ -95,7 +155,24 @@ class _MainConsultationState extends State<MainConsultation> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+            child: Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                textDirection: TextDirection.rtl,
+                children: <Widget>[
+                  Text(
+                    "Waktu",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Dokter",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            )
           ),
           Container(
             child: Text(
@@ -106,7 +183,24 @@ class _MainConsultationState extends State<MainConsultation> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+            child: Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                textDirection: TextDirection.rtl,
+                children: <Widget>[
+                  Text(
+                    "Waktu",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Dokter",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            )
           ),
           Container(
             child: Text(
@@ -117,7 +211,24 @@ class _MainConsultationState extends State<MainConsultation> {
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
           ),
           Container(
-
+            child: Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                textDirection: TextDirection.rtl,
+                children: <Widget>[
+                  Text(
+                    "Waktu",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "Dokter",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            )
           ),
           Container(
             child: Text(
@@ -126,6 +237,26 @@ class _MainConsultationState extends State<MainConsultation> {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+          ),
+          Container(
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  textDirection: TextDirection.rtl,
+                  children: <Widget>[
+                    Text(
+                      "Waktu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "Dokter",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              )
           ),
         ],
       ),

@@ -87,6 +87,7 @@ class Profile {
 class Booking {
   late int id;
   late int dokter;
+  late String namaDokter;
   late String hariKonsultasi;
   late String namaPasien;
   late String nomorHandphone;
@@ -95,6 +96,7 @@ class Booking {
   Booking ({
     required this.id,
     required this.dokter,
+    required this.namaDokter,
     required this.hariKonsultasi,
     required this.namaPasien,
     required this.nomorHandphone,
@@ -104,6 +106,7 @@ class Booking {
   factory Booking.fromJson(Map<String, dynamic> json) => Booking(
     id: json["pk"],
     dokter: json["fields"]["dokter"],
+    namaDokter: json["fields"]["nama_dokter"],
     hariKonsultasi: json["fields"]["hari_konsultasi"],
     namaPasien: json["fields"]["nama_pasien"],
     nomorHandphone: json["fields"]["nomor_handphone"],
@@ -113,6 +116,7 @@ class Booking {
   Map<String, dynamic> toJson() => {
     "pk": id,
     "dokter": dokter,
+    "nama_dokter": namaDokter,
     "hari_konsultasi": hariKonsultasi,
     "nama_pasien": namaPasien,
     "nomor_handphone": nomorHandphone,

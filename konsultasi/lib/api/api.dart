@@ -6,8 +6,8 @@ import 'package:konsultasi/models/model.dart';
 
 
 class GetProfile {
-  Future<List<Profile>> getDoctorName() async {
-    String url = "http://covid-consult-herokuapp.com/consultation/flutter-get-doctor";
+  Future<List<Profile>> getProfile() async {
+    String url = "http://covid-consult-herokuapp.com/consultation/flutter-get-profile";
     http.Response response = await http.get(Uri.parse(url));
     var data = jsonDecode(utf8.decode(response.bodyBytes));
     List<Profile> profile = [];
@@ -21,7 +21,7 @@ class GetProfile {
 }
 
 
-class ConsultationPatient {
+class GetConsultationPatient {
   Future<List<Consultation>> getConsultationPatient() async {
     String url = "http://covid-consult-herokuapp.com/consultation/flutter-consultation-patient/";
     http.Response response = await http.get(Uri.parse(url));
@@ -37,7 +37,7 @@ class ConsultationPatient {
 }
 
 
-class ConsultationDoctor {
+class GetConsultationDoctor {
   Future<List<Consultation>> getConsultationPatient() async {
     String url = "http://covid-consult-herokuapp.com/konsultasi/flutter-consultation-doctor/";
     http.Response response = await http.get(Uri.parse(url));
