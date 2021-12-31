@@ -66,7 +66,7 @@ class _ConsultationPatientState extends State<ConsultationPatient> {
           Container(
             child: Row(
               textDirection: TextDirection.rtl,
-              children: <Widget>[
+              children: const <Widget>[
                 Text(
                   "Waktu",
                   textAlign: TextAlign.center,
