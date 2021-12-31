@@ -8,7 +8,6 @@ import 'package:article/article.dart';
 import 'package:konsultasi/konsultasi.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
-// import 'package:provider/src/provider.dart';
 // import 'package:consultation/consultation.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -99,12 +98,11 @@ class MainDrawer extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        const MainProfile(title: 'Obatpedia')));
+                    builder: (context) => const MainProfile(title: 'Profile')));
           }),
           buildListTile('Logout', Icons.login, () async {
-            final response = await request
-                .logoutAccount("http://127.0.0.1:8000/accounts/logoutFlutter");
+            final response = await request.logoutAccount(
+                "https://covid-consult.herokuapp.com/accounts/logoutFlutter");
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.push(

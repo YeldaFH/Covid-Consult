@@ -16,7 +16,8 @@ class _SignInScreen extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final snackBar = SnackBar(
-    content: const Text('An error occured, please try again!'),
+    content: const Text('An error occured, please try again!',
+        style: TextStyle(color: Colors.white)),
     behavior: SnackBarBehavior.floating,
     backgroundColor: Colors.pink.shade500,
   );
@@ -134,6 +135,14 @@ class _SignInScreen extends State<SignInScreen> {
                                 Icons.lock_outline,
                                 color: Color(0xFF9F7AEA),
                               ),
+                              suffix: InkWell(
+                                  onTap: togglePasswordView,
+                                  child: Icon(
+                                    isPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: const Color(0xFF9F7AEA),
+                                  )),
                               border: const OutlineInputBorder(),
                               enabledBorder: const OutlineInputBorder(
                                 borderSide:
@@ -178,10 +187,11 @@ class _SignInScreen extends State<SignInScreen> {
                               primary: const Color(0xFF9F7AEA)),
                           onPressed: () async {
                             final response = await request.login(
-                                "http://127.0.0.1:8000/accounts/loginFlutter", {
-                              'username': username,
-                              'password': password1,
-                            });
+                                "https://covid-consult.herokuapp.com/accounts/loginFlutter",
+                                {
+                                  'username': username,
+                                  'password': password1,
+                                });
                             if (response['status']) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(

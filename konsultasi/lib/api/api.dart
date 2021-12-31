@@ -1,9 +1,10 @@
+// ignore_for_file: unused_import
+
 import 'dart:convert';
 import 'package:forum/models/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:covid_consult/common/network_service.dart';
 import 'package:konsultasi/models/model.dart';
-
 
 class GetProfile {
   Future<List<Profile>> getDoctorName() async {
