@@ -29,7 +29,6 @@ class Add_Consultation extends State<ConsultationForm> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<NetworkService>();
     return Scaffold(
       drawer: const MainDrawer(),
       appBar: AppBar(
