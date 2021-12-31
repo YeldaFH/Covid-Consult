@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print, prefer_const_constructors_in_immutables, prefer_const_constructors, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, prefer_is_empty, non_constant_identifier_names, unused_field, duplicate_ignore, sized_box_for_whitespace
-
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:covid_consult/widgets/main_drawer.dart';
+import 'package:forum/models/model.dart';
 import 'package:forum/screens/add_forum.dart';
 import 'package:forum/screens/detail_forum.dart';
 import 'package:forum/screens/detail_forum_search.dart';
@@ -168,6 +168,20 @@ class _MainForumState extends State<MainForum> {
                     var dataForum = snapshot.data![index];
                     var day = dataForum.dateTime.substring(8, 10);
                     var month = dataForum.dateTime.substring(5, 7);
+                    switch(month){
+                      case "01": month = "Jan"; break;
+                      case "02": month = "Feb"; break;
+                      case "03": month = "Mar"; break;
+                      case "04": month = "Apr"; break;
+                      case "05": month = "May"; break;
+                      case "06": month = "Jun"; break;
+                      case "07": month = "Jul"; break;
+                      case "08": month = "Aug"; break;
+                      case "09": month = "Sep"; break;
+                      case "10": month = "Oct"; break;
+                      case "11": month = "Nov"; break;
+                      case "12": month = "Dec"; break;
+                    }
                     var year = dataForum.dateTime.substring(0, 4);
                     var time = dataForum.dateTime.substring(11, 16);
                     var dateTime =
@@ -255,36 +269,25 @@ class CategoryIcon extends StatelessWidget {
           icon: Icon(icon),
           onPressed: () {
             if (iconText == 'All Category') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'All Category')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'All Category')));
             } else if (iconText == 'General Discussion') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum',
-                          currentCategory: 'General Discussion')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'General Discussion')));
             } else if (iconText == 'Drug Info') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'Drug Info')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'Drug Info')));
             } else if (iconText == 'Covid Info') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'Covid Info')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'Covid Info')));
             } else if (iconText == 'My Discussion') {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                      builder: (_) => MainForum(
-                          title: 'Forum', currentCategory: 'My Discussion')),
-                  (Route<dynamic> route) => false);
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => MainForum(
+                          title: 'Forum', currentCategory: 'My Discussion')));
             }
           },
         ),
@@ -465,18 +468,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-}
-
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
 class Debouncer {

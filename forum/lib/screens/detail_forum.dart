@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, no_logic_in_create_state
-
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, no_logic_in_create_state, unnecessary_brace_in_string_interps
 import 'package:covid_consult/common/network_service.dart';
 import 'package:forum/screens/add_reply.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:forum/api/api.dart';
 import 'package:forum/models/model.dart';
 import 'dart:convert' as convert;
-import '../forum.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 // ignore: camel_case_types
@@ -37,6 +35,31 @@ class DetailForumState extends State<DetailForum> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
+    var day = dataForum.dateTime.substring(8, 10);
+    var month = dataForum.dateTime.substring(5, 7);
+    switch(month){
+      case "01": month = "Jan"; break;
+      case "02": month = "Feb"; break;
+      case "03": month = "Mar"; break;
+      case "04": month = "Apr"; break;
+      case "05": month = "May"; break;
+      case "06": month = "Jun"; break;
+      case "07": month = "Jul"; break;
+      case "08": month = "Aug"; break;
+      case "09": month = "Sep"; break;
+      case "10": month = "Oct"; break;
+      case "11": month = "Nov"; break;
+      case "12": month = "Dec"; break;
+    }
+    var year = dataForum.dateTime.substring(0, 4);
+    var time = dataForum.dateTime.substring(11, 16);
+    var dateTime = day + '-' + month + '-' + year + '\n' + time + ' WIB';
+    var kategori = dataForum.kategori;
+    switch (kategori) {
+      case "general": kategori = "General Discussion"; break;
+      case "covid":kategori = "Covid Info"; break;
+      case "drug": kategori = "Drug Info"; break;
+    }
     return Scaffold(
       backgroundColor: const Color(0xff131313),
       appBar: AppBar(
@@ -59,15 +82,14 @@ class DetailForumState extends State<DetailForum> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          margin: const EdgeInsets.fromLTRB(0, 25, 0, 3),
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 3),
         ),
         Container(
-          child: Text(
-            dataForum.namaPenulis,
+          child: Text('[${kategori}]\nPost by ${dataForum.namaPenulis} on ${dateTime}',
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
           ),
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         ),
         Container(
           child: Text(
@@ -132,7 +154,7 @@ class DetailForumState extends State<DetailForum> {
                             var data = dataForum.id;
                             // print(data);
                             String url =
-                                "http://covid-consult.herokuapp.com/forum/commentNewForum/$data/";
+                                "https://covid-consult.herokuapp.com/forum/commentNewForum/$data/";
                             // print(url);
                             final response = await request.postJson(
                               url,
@@ -148,11 +170,8 @@ class DetailForumState extends State<DetailForum> {
                               setState(() {
                                 _comment = "";
                               });
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => DetailForum(dataForum)));
+                              Navigator.pushReplacement(context, MaterialPageRoute(
+                                  builder: (context) => DetailForum(dataForum)));
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(const SnackBar(
@@ -218,6 +237,20 @@ class DetailForumState extends State<DetailForum> {
   Widget buildCommentItem(Comment komen) {
     var day = komen.dateTime.substring(8, 10);
     var month = komen.dateTime.substring(5, 7);
+    switch(month){
+      case "01": month = "Jan"; break;
+      case "02": month = "Feb"; break;
+      case "03": month = "Mar"; break;
+      case "04": month = "Apr"; break;
+      case "05": month = "May"; break;
+      case "06": month = "Jun"; break;
+      case "07": month = "Jul"; break;
+      case "08": month = "Aug"; break;
+      case "09": month = "Sep"; break;
+      case "10": month = "Oct"; break;
+      case "11": month = "Nov"; break;
+      case "12": month = "Dec"; break;
+    }
     var year = komen.dateTime.substring(0, 4);
     var time = komen.dateTime.substring(11, 16);
     var dateTime = day + '-' + month + '-' + year + ' || ' + time + ' WIB';
@@ -289,7 +322,11 @@ class DetailForumState extends State<DetailForum> {
                       MaterialPageRoute(
                           builder: (_) => AddReply(komen, dataForum)));
                 },
-                child: const Text('Reply')),
+                child: Text('Reply',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: HexColor('#a057b3')))),
           ],
         ),
       ),
@@ -299,6 +336,20 @@ class DetailForumState extends State<DetailForum> {
   Widget buildReplyItem(Reply reply) {
     var day = reply.dateTime.substring(8, 10);
     var month = reply.dateTime.substring(5, 7);
+    switch(month){
+      case "01": month = "Jan"; break;
+      case "02": month = "Feb"; break;
+      case "03": month = "Mar"; break;
+      case "04": month = "Apr"; break;
+      case "05": month = "May"; break;
+      case "06": month = "Jun"; break;
+      case "07": month = "Jul"; break;
+      case "08": month = "Aug"; break;
+      case "09": month = "Sep"; break;
+      case "10": month = "Oct"; break;
+      case "11": month = "Nov"; break;
+      case "12": month = "Dec"; break;
+    }
     var year = reply.dateTime.substring(0, 4);
     var time = reply.dateTime.substring(11, 16);
     var dateTime = day + '-' + month + '-' + year + ' || ' + time + ' WIB';

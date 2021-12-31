@@ -1,5 +1,6 @@
+// ignore_for_file: unused_import
+
 import 'package:covid_consult/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:konsultasi/models/model.dart';
 import 'package:konsultasi/screens/consultation_patient.dart';
@@ -263,3 +264,4 @@ class _MainConsultationState extends State<MainConsultation> {
     );
   }
 }
+
