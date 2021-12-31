@@ -13,6 +13,10 @@ dependencies:
     sdk: flutter
   covid_consult:
     path: ../.
+  provider: ^6.0.1
+  http: ^0.13.4
+  image_picker:
+  image:
 
 dev_dependencies:
   flutter_test:
