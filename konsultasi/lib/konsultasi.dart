@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:covid_consult/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +13,10 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
-    darkTheme: ThemeData(
-        brightness: Brightness.dark, primarySwatch: Colors.purple),
-    themeMode: ThemeMode.dark,
-    title: title,
-  );
+        debugShowCheckedModeBanner: false,
+        darkTheme: ThemeData(
+            brightness: Brightness.dark, primarySwatch: Colors.purple),
+        themeMode: ThemeMode.dark,
+        title: title,
+      );
 }
