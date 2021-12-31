@@ -2,9 +2,9 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   article:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: article
+      path: "../article"
       relative: true
     source: path
     version: "0.0.1"
@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "2.1.0"
   bouncing_widget:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bouncing_widget
       url: "https://pub.dartlang.org"
@@ -57,22 +57,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cross_file:
-    dependency: transitive
-    description:
-      name: cross_file
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
-  cupertino_icons:
+  covid_consult:
     dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  cupertino_icons:
+    dependency: transitive
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
   date_format:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: date_format
       url: "https://pub.dartlang.org"
@@ -105,7 +105,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_carousel_slider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_carousel_slider
       url: "https://pub.dartlang.org"
@@ -118,13 +118,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -136,9 +129,9 @@ packages:
     source: sdk
     version: "0.0.0"
   forum:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: forum
+      path: "../forum"
       relative: true
     source: path
     version: "0.0.1"
@@ -156,29 +149,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  image_picker:
-    dependency: transitive
-    description:
-      name: image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.4+4"
-  image_picker_for_web:
-    dependency: transitive
-    description:
-      name: image_picker_for_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.4"
-  image_picker_platform_interface:
-    dependency: transitive
-    description:
-      name: image_picker_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.4.1"
   intl:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -191,13 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  konsultasi:
-    dependency: "direct main"
-    description:
-      path: konsultasi
-      relative: true
-    source: path
-    version: "0.0.1"
   lints:
     dependency: transitive
     description:
@@ -227,9 +192,9 @@ packages:
     source: hosted
     version: "1.0.0"
   obatpedia:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: obatpedia
+      path: "../obatpedia"
       relative: true
     source: path
     version: "0.0.1"
@@ -283,9 +248,9 @@ packages:
     source: hosted
     version: "4.2.4"
   profil:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: profil
+      path: "../profil"
       relative: true
     source: path
     version: "0.0.1"
@@ -295,16 +260,16 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.1"
+    version: "6.0.2"
   search_page:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: search_page
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0+1"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
