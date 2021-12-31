@@ -93,12 +93,11 @@ class MainDrawer extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        const MainProfile(title: 'Profile')));
+                    builder: (context) => const MainProfile(title: 'Profile')));
           }),
           buildListTile('Logout', Icons.login, () async {
-            final response = await request
-                .logoutAccount("http://127.0.0.1:8000/accounts/logoutFlutter");
+            final response = await request.logoutAccount(
+                "https://covid-consult.herokuapp.com/accounts/logoutFlutter");
             if (response['status']) {
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.push(
