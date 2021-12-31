@@ -51,6 +51,8 @@ dependencies:
     path: obatpedia
   profil:
     path: profil
+  konsultasi:
+    path: konsultasi
 
 dev_dependencies:
   flutter_test:

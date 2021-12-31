@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:covid_consult/screens/sign_in.dart';
+// import 'package:covid_consult/screens/sign_in.dart';
+import 'package:forum/forum.dart';
+import 'package:article/article.dart';
 import 'package:covid_consult/common/network_service.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark, primarySwatch: Colors.deepPurple),
           themeMode: ThemeMode.dark,
           title: title,
-          home: const SignInScreen(),
+          // home: const SignInScreen(),
+          // home: MainForum(title: 'Title', currentCategory: 'All'),
+          home: const MainArticle(title: 'Title'),
         ));
   }
 }
