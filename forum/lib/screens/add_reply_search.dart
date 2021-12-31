@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, no_logic_in_create_state
+// ignore_for_file: unused_import, must_be_immutable, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, no_logic_in_create_state, unnecessary_brace_in_string_interps
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:forum/screens/detail_forum.dart';
@@ -32,6 +32,25 @@ class AddReplyState extends State<AddReplySearch> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
+    var day = komen.dateTime.substring(8, 10);
+    var month = komen.dateTime.substring(5, 7);
+    switch(month){
+      case "01": month = "Jan"; break;
+      case "02": month = "Feb"; break;
+      case "03": month = "Mar"; break;
+      case "04": month = "Apr"; break;
+      case "05": month = "May"; break;
+      case "06": month = "Jun"; break;
+      case "07": month = "Jul"; break;
+      case "08": month = "Aug"; break;
+      case "09": month = "Sep"; break;
+      case "10": month = "Oct"; break;
+      case "11": month = "Nov"; break;
+      case "12": month = "Dec"; break;
+    }
+    var year = komen.dateTime.substring(0, 4);
+    var time = komen.dateTime.substring(11, 16);
+    var dateTime = day + '-' + month + '-' + year + '\n' + time + ' WIB';
     return Scaffold(
       backgroundColor: const Color(0xff131313),
       appBar: AppBar(
@@ -49,12 +68,11 @@ class AddReplyState extends State<AddReplySearch> {
           ),
         ),
         Container(
-          child: Text(
-            komen.namaPenulis,
+          child: Text('${komen.namaPenulis} ${dateTime}',
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
           ),
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
         ),
         Container(
           child: Text(

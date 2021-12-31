@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, prefer_const_constructors, no_logic_in_create_state, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, unused_element
+// ignore_for_file: must_be_immutable, prefer_const_constructors, no_logic_in_create_state, prefer_typing_uninitialized_variables, use_key_in_widget_constructors, unnecessary_this, unused_element, unnecessary_brace_in_string_interps
 import 'package:covid_consult/common/network_service.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 // import 'package:forum/screens/add_reply.dart';
@@ -36,6 +36,31 @@ class DetailForumSearchState extends State<DetailForumSearch> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
+    var day = dataForum['DateTime'].substring(8, 10);
+    var month = dataForum['DateTime'].substring(5, 7);
+    switch(month){
+      case "01": month = "Jan"; break;
+      case "02": month = "Feb"; break;
+      case "03": month = "Mar"; break;
+      case "04": month = "Apr"; break;
+      case "05": month = "May"; break;
+      case "06": month = "Jun"; break;
+      case "07": month = "Jul"; break;
+      case "08": month = "Aug"; break;
+      case "09": month = "Sep"; break;
+      case "10": month = "Oct"; break;
+      case "11": month = "Nov"; break;
+      case "12": month = "Dec"; break;
+    }
+    var year = dataForum['DateTime'].substring(0, 4);
+    var time = dataForum['DateTime'].substring(11, 16);
+    var dateTime = day + '-' + month + '-' + year + '\n' + time + ' WIB';
+    var kategori = dataForum['kategori'];
+    switch (kategori) {
+      case "general": kategori = "General Discussion"; break;
+      case "covid":kategori = "Covid Info"; break;
+      case "drug": kategori = "Drug Info"; break;
+    }
     return Scaffold(
       backgroundColor: const Color(0xff131313),
       appBar: AppBar(
@@ -58,15 +83,14 @@ class DetailForumSearchState extends State<DetailForumSearch> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          margin: const EdgeInsets.fromLTRB(0, 25, 0, 3),
+          margin: const EdgeInsets.fromLTRB(0, 15, 0, 3),
         ),
         Container(
-          child: Text(
-            dataForum['namaPenulis'],
+          child: Text('[${kategori}]\nPost by ${dataForum['namaPenulis']} on ${dateTime}',
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
           ),
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         ),
         Container(
           child: Text(
