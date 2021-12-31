@@ -93,7 +93,7 @@ class _MainConsultationState extends State<MainConsultation> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       textDirection: TextDirection.rtl,
-                      children: <Widget>[
+                      children: const <Widget>[
                         Text(
                           "Waktu",
                           textAlign: TextAlign.center,
@@ -157,7 +157,7 @@ class _MainConsultationState extends State<MainConsultation> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 textDirection: TextDirection.rtl,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Waktu",
                     textAlign: TextAlign.center,
@@ -185,7 +185,7 @@ class _MainConsultationState extends State<MainConsultation> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 textDirection: TextDirection.rtl,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Waktu",
                     textAlign: TextAlign.center,
@@ -213,7 +213,7 @@ class _MainConsultationState extends State<MainConsultation> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 textDirection: TextDirection.rtl,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Waktu",
                     textAlign: TextAlign.center,
@@ -241,7 +241,7 @@ class _MainConsultationState extends State<MainConsultation> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   textDirection: TextDirection.rtl,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       "Waktu",
                       textAlign: TextAlign.center,
